@@ -1,0 +1,6 @@
+framework module Pods_NewSpaceApp {
+  umbrella header "Pods-NewSpaceApp-umbrella.h"
+
+  export *
+  module * { export * }
+}

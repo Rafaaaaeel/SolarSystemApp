@@ -10,8 +10,8 @@ import SnapKit
 
 class PlanetsViewController: UIViewController, UICollectionViewDelegate, CodableViews, UICollectionViewDataSource {
     
-    var planets: SolarSystem?
-    var apiClient = APIClient.shared
+    private var planets: SolarSystem?
+    private var presenter: PlanetsPresenter
     
     lazy var collection: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -24,6 +24,17 @@ class PlanetsViewController: UIViewController, UICollectionViewDelegate, Codable
         return view
     }()
     
+    init(presenter: PlanetsPresenter) {
+        self.presenter = presenter
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+//  MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -42,7 +53,7 @@ extension PlanetsViewController{
     }
     
     func additional() {
-        fetchData()
+        fetchPlanetsData()
     }
     
 }
@@ -59,29 +70,30 @@ extension PlanetsViewController{
     }
 }
 
-
-
-extension PlanetsViewController{
+extension PlanetsViewController {
     
-    private func fetchData(){
-        apiClient.fetchPlanetsData{ [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let success):
-                self.planets = success
-                print(self.planets)
-                self.updateCollection()
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-            
-        }
-    }
-    
-    private func updateCollection() {
+    private func successHandler() {
         DispatchQueue.main.async {
             self.collection.reloadData()
         }
     }
     
+    private func errorHandler() {
+        view.backgroundColor = .red
+    }
+    
+    private func fetchPlanetsData() {
+        presenter.fetchPlanetsData() { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let solarSystem):
+                self.planets = solarSystem
+                self.successHandler()
+            case .failure:
+                self.errorHandler()
+            }
+        }
+    }
 }
+
+

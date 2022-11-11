@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+
+protocol PlanetsProtocol{
+    func fetchPlanetsData(completion: @escaping (Result<SolarSystem, APIError>) -> Void)
+}

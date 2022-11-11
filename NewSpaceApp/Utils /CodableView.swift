@@ -6,3 +6,21 @@
 //
 
 import Foundation
+
+
+public protocol CodableViews{
+    func setup()
+    func setupHierachy()
+    func setupConstraints()
+    func additional()
+}
+
+extension CodableViews{
+    func setup(){
+        setupHierachy()
+        setupConstraints()
+        additional()
+    }
+    
+    func additional() { }
+}

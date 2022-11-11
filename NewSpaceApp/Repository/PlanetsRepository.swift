@@ -1,28 +1,26 @@
 //
-//  PlanetsPresenter.swift
+//  PlanetsRepository.swift
 //  NewSpaceApp
 //
-//  Created by Rafael Oliveira on 29/09/22.
+//  Created by Rafael Oliveira on 11/11/22.
 //
 
 import Foundation
 
-protocol PlanetsPresenterOutputProtocol {
+protocol PlanetsRepositoryProtocol {
     func fetchPlanetsData(completion: @escaping (Result<SolarSystem, Error>) -> Void?)
 }
 
+class PlanetsRepository: PlanetsRepositoryProtocol {
 
-class PlanetsPresenter: PlanetsPresenterOutputProtocol{
-
-    var repository: PlanetsRepository
+    private var apiClient: APIClient
     
-    init(repository: PlanetsRepository) {
-        self.repository = repository
+    init(apiClient: APIClient = APIClient.shared) {
+        self.apiClient = apiClient
     }
-    
 
     func fetchPlanetsData(completion: @escaping (Result<SolarSystem, Error>) -> Void?) {
-        repository.fetchPlanetsData() { result in
+        apiClient.fetchPlanetsData{ result in
             switch result {
             case .success(let solarSystem):
                 completion(.success(solarSystem))
