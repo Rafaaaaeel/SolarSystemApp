@@ -8,21 +8,19 @@
 import UIKit
 import SnapKit
 
-class PlanetsViewController: UIViewController, UICollectionViewDelegate, CodableViews, UICollectionViewDataSource {
+class PlanetsViewController: UIViewController, CodableViews, UITableViewDelegate, UITableViewDataSource {
     
     private var planets: SolarSystem?
     private var presenter: PlanetsPresenter
     private var solarSystemPlanets: [String] = []
     
-    lazy var collection: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 16
-        layout.scrollDirection = .vertical
-        let view = UICollectionView(frame: .zero, collectionViewLayout: layout.createLayoutPortrait())
-        view.delegate = self
-        view.dataSource = self
-        view.register(PlanetsCollectionViewCell.self, forCellWithReuseIdentifier: PlanetsCollectionViewCell.identifier)
-        return view
+    lazy var planetsTableView: UITableView = {
+        let table = UITableView()
+        table.delegate = self
+        table.dataSource = self
+        table.register(PlanetsTableViewCell.self, forCellReuseIdentifier: PlanetsTableViewCell.identifier)
+        table.rowHeight = PlanetsTableViewCell.RowHeight
+        return table
     }()
     
     init(presenter: PlanetsPresenter) {
@@ -44,11 +42,11 @@ class PlanetsViewController: UIViewController, UICollectionViewDelegate, Codable
 }
 extension PlanetsViewController{
     func setupHierachy() {
-        view.addSubview(collection)
+        view.addSubview(planetsTableView)
     }
     
     func setupConstraints() {
-        collection.snp.makeConstraints { make in
+        planetsTableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
@@ -60,14 +58,15 @@ extension PlanetsViewController{
 }
 
 extension PlanetsViewController{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print(self.solarSystemPlanets.count)
         return self.solarSystemPlanets.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PlanetsCollectionViewCell.identifier, for: indexPath) as! PlanetsCollectionViewCell
-        cell.config(planet: .netptune)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: PlanetsTableViewCell.identifier, for: indexPath) as! PlanetsTableViewCell
+        cell.config(planet: .earth)
         return cell
     }
 }
@@ -76,13 +75,13 @@ extension PlanetsViewController {
     
     private func successHandler() {
         DispatchQueue.main.async {
-            self.collection.reloadData()
+            self.planetsTableView.reloadData()
         }
     }
     
     private func errorHandler() {
         DispatchQueue.main.async {
-            self.collection.backgroundColor = .red
+            self.planetsTableView.backgroundColor = .red
         }
     }
     

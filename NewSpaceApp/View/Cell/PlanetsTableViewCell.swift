@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 enum SolarSystemPlanets{
     case mercury
@@ -18,20 +19,20 @@ enum SolarSystemPlanets{
     case netptune
 }
 
-class PlanetsCollectionViewCell: UICollectionViewCell, CodableViews {
+class PlanetsTableViewCell: UITableViewCell, CodableViews {
     
-    static let identifier = String(describing: PlanetsCollectionViewCell.self)
+    static let identifier = String(describing: PlanetsTableViewCell.self)
+    static var RowHeight: CGFloat = 180
     
-    internal var imageView: UIImageView = {
+    lazy var imageView1: UIImageView = {
        let image = UIImageView()
-        image.contentMode = .scaleAspectFill
+        image.contentMode = .scaleAspectFit
         image.clipsToBounds = true
-        
         return image
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         setup()
     }
     
@@ -41,52 +42,55 @@ class PlanetsCollectionViewCell: UICollectionViewCell, CodableViews {
     
 }
 
-extension PlanetsCollectionViewCell{
+extension PlanetsTableViewCell{
     
     func setupHierachy() {
-        contentView.addSubview(imageView)
+        contentView.addSubview(imageView1)
         backgroundColor = .white
     }
     
     func setupConstraints() {
-        imageView.frame = contentView.bounds
+        
+        imageView1.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
     
 }
-extension PlanetsCollectionViewCell{
+extension PlanetsTableViewCell{
     func config(planet: SolarSystemPlanets){
         switch planet{
         case .mercury:
             let imageN = UIImage(named: "neptune")
-            self.imageView.image = imageN
+            self.imageView1.image = imageN
             return
         case .venus:
             let imageN = UIImage(named: "neptune")
-            self.imageView.image = imageN
+            self.imageView1.image = imageN
             return
         case .earth:
             let imageN = UIImage(named: "earth")
-            self.imageView.image = imageN
+            self.imageView1.image = imageN
             return
         case .mars:
             let imageN = UIImage(named: "neptune")
-            self.imageView.image = imageN
+            self.imageView1.image = imageN
             return
         case .juptier:
             let imageN = UIImage(named: "neptune")
-            self.imageView.image = imageN
+            self.imageView1.image = imageN
             return
         case .saturn:
             let imageN = UIImage(named: "neptune")
-            self.imageView.image = imageN
+            self.imageView1.image = imageN
             return
         case .uranus:
             let imageN = UIImage(named: "neptune")
-            self.imageView.image = imageN
+            self.imageView1.image = imageN
             return
         case .netptune:
             let imageN = UIImage(named: "neptune")
-            self.imageView.image = imageN
+            self.imageView1.image = imageN
             return
         }
     }
