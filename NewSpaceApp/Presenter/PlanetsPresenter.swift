@@ -9,8 +9,8 @@ import Foundation
 
 protocol PlanetsPresenterOutputProtocol {
     func fetchPlanetsData(completion: @escaping (Result<SolarSystem, Error>) -> Void?)
+    func filterPlanets(solarSystem: SolarSystem) -> [String]
 }
-
 
 class PlanetsPresenter: PlanetsPresenterOutputProtocol{
 
@@ -19,7 +19,6 @@ class PlanetsPresenter: PlanetsPresenterOutputProtocol{
     init(repository: PlanetsRepository) {
         self.repository = repository
     }
-    
 
     func fetchPlanetsData(completion: @escaping (Result<SolarSystem, Error>) -> Void?) {
         repository.fetchPlanetsData() { result in
@@ -31,4 +30,16 @@ class PlanetsPresenter: PlanetsPresenterOutputProtocol{
             }
         }
     }
+    
+    func filterPlanets(solarSystem: SolarSystem) -> [String] {
+        var solarSystemPlanets: [String] = []
+        for planet in solarSystem.bodies {
+            if planet.isPlanet {
+                solarSystemPlanets.append(planet.englishName)
+                print(planet.englishName)
+            }
+        }
+        return solarSystemPlanets
+    }
+    
 }

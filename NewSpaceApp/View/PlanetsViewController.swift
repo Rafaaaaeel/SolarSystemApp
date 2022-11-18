@@ -12,6 +12,7 @@ class PlanetsViewController: UIViewController, UICollectionViewDelegate, Codable
     
     private var planets: SolarSystem?
     private var presenter: PlanetsPresenter
+    private var solarSystemPlanets: [String] = []
     
     lazy var collection: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -60,12 +61,13 @@ extension PlanetsViewController{
 
 extension PlanetsViewController{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.planets?.bodies.count ?? 0
+        print(self.solarSystemPlanets.count)
+        return self.solarSystemPlanets.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PlanetsCollectionViewCell.identifier, for: indexPath) as! PlanetsCollectionViewCell
-        cell.config(planet: .earth)
+        cell.config(planet: .netptune)
         return cell
     }
 }
@@ -79,7 +81,9 @@ extension PlanetsViewController {
     }
     
     private func errorHandler() {
-        view.backgroundColor = .red
+        DispatchQueue.main.async {
+            self.collection.backgroundColor = .red
+        }
     }
     
     private func fetchPlanetsData() {
@@ -88,11 +92,17 @@ extension PlanetsViewController {
             switch result {
             case .success(let solarSystem):
                 self.planets = solarSystem
+                self.fetchSolarSystemPlanets()
                 self.successHandler()
             case .failure:
                 self.errorHandler()
             }
         }
+    }
+    
+    private func fetchSolarSystemPlanets() {
+        guard let planets = self.planets else { return }
+        self.solarSystemPlanets = presenter.filterPlanets(solarSystem: planets)
     }
 }
 

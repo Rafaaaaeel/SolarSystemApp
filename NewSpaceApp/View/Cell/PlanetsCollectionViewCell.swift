@@ -16,9 +16,7 @@ enum SolarSystemPlanets{
     case saturn
     case uranus
     case netptune
-    case pluto
 }
-
 
 class PlanetsCollectionViewCell: UICollectionViewCell, CodableViews {
     
@@ -87,10 +85,6 @@ extension PlanetsCollectionViewCell{
             self.imageView.image = imageN
             return
         case .netptune:
-            let imageN = UIImage(named: "neptune")
-            self.imageView.image = imageN
-            return
-        case .pluto:
             let imageN = UIImage(named: "neptune")
             self.imageView.image = imageN
             return
