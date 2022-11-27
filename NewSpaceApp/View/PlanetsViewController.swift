@@ -8,19 +8,48 @@
 import UIKit
 import SnapKit
 
-class PlanetsViewController: UIViewController, CodableViews, UITableViewDelegate, UITableViewDataSource {
+
+class PlanetsViewController: UIViewController, CodableViews, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    private var planets: SolarSystem?
-    private var presenter: PlanetsPresenter
-    private var solarSystemPlanets: [String] = []
+    var presenter: PlanetsPresenter
     
-    lazy var planetsTableView: UITableView = {
-        let table = UITableView()
-        table.delegate = self
-        table.dataSource = self
-        table.register(PlanetsTableViewCell.self, forCellReuseIdentifier: PlanetsTableViewCell.identifier)
-        table.rowHeight = PlanetsTableViewCell.RowHeight
-        return table
+    lazy var titleLabelTop: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.text = "SELECT YOUR"
+        label.textAlignment = .center
+        label.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        return label
+    }()
+    
+    lazy var titleLabelBottom: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.text = "DESTINATION"
+        label.textAlignment = .center
+        label.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        return label
+    }()
+    
+    lazy var viewSquare: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = self.view.frame.size.width / 2
+        view.clipsToBounds = true
+        view.layer.borderColor = UIColor.white.cgColor
+        view.layer.borderWidth = 1.0
+        return view
+    }()
+    
+    lazy var collection: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 16
+        layout.scrollDirection = .vertical
+        let view = UICollectionView(frame: .zero, collectionViewLayout: layout.createLayoutPortrait())
+        view.delegate = self
+        view.dataSource = self
+        view.isScrollEnabled = false
+        view.register(PlanetsCollectionViewCell.self, forCellWithReuseIdentifier: PlanetsCollectionViewCell.identifier)
+        return view
     }()
     
     init(presenter: PlanetsPresenter) {
@@ -40,69 +69,41 @@ class PlanetsViewController: UIViewController, CodableViews, UITableViewDelegate
     }
 
 }
+
 extension PlanetsViewController{
     func setupHierachy() {
-        view.addSubview(planetsTableView)
+        view.addSubviews(titleLabelTop, titleLabelBottom, viewSquare, collection)
     }
     
     func setupConstraints() {
-        planetsTableView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+        
+        titleLabelTop.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.topMargin)
+            make.horizontalEdges.equalToSuperview()
+        }
+        
+        titleLabelBottom.snp.makeConstraints { make in
+            make.top.equalTo(titleLabelTop.snp.bottom)
+            make.horizontalEdges.equalToSuperview()
+        }
+        
+        viewSquare.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.width.equalTo(400)
+            make.height.equalTo(400)
+        }
+        
+        collection.snp.makeConstraints { make in
+            make.bottom.equalToSuperview()
+            make.horizontalEdges.equalToSuperview()
+            make.top.equalTo(viewSquare.snp.bottom)
         }
     }
     
     func additional() {
-        fetchPlanetsData()
+        collection.backgroundColor = .blueTest
+        view.backgroundColor = .blueTest
+        presenter.view = self
     }
     
 }
-
-extension PlanetsViewController{
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(self.solarSystemPlanets.count)
-        return self.solarSystemPlanets.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: PlanetsTableViewCell.identifier, for: indexPath) as! PlanetsTableViewCell
-        cell.config(planet: .earth)
-        return cell
-    }
-}
-
-extension PlanetsViewController {
-    
-    private func successHandler() {
-        DispatchQueue.main.async {
-            self.planetsTableView.reloadData()
-        }
-    }
-    
-    private func errorHandler() {
-        DispatchQueue.main.async {
-            self.planetsTableView.backgroundColor = .red
-        }
-    }
-    
-    private func fetchPlanetsData() {
-        presenter.fetchPlanetsData() { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let solarSystem):
-                self.planets = solarSystem
-                self.fetchSolarSystemPlanets()
-                self.successHandler()
-            case .failure:
-                self.errorHandler()
-            }
-        }
-    }
-    
-    private func fetchSolarSystemPlanets() {
-        guard let planets = self.planets else { return }
-        self.solarSystemPlanets = presenter.filterPlanets(solarSystem: planets)
-    }
-}
-
-

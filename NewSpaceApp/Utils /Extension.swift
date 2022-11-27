@@ -34,7 +34,7 @@ extension UICollectionViewLayout{
         // Item
         let item = NSCollectionLayoutItem(
             layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1),
+                widthDimension: .fractionalWidth(1/3),
                 heightDimension: .fractionalHeight(1)
             )
         )
@@ -43,54 +43,20 @@ extension UICollectionViewLayout{
         
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1),
+                widthDimension: .fractionalWidth(1/3),
                 heightDimension: .fractionalHeight(1)
             ),
             subitem: item,
             count: 1)
         
         let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .groupPaging
+        section.orthogonalScrollingBehavior = .groupPagingCentered
         return UICollectionViewCompositionalLayout(section: section)
     }
     
 }
 
 //  MARK: - UITextField
-let passwordTottleButton = UIButton(type: .custom)
-
-extension UITextField {
-    internal func addBottomBorder(height: CGFloat = 1.0, color: UIColor = .darkGray) {
-        let borderView = UIView()
-        borderView.backgroundColor = color
-        borderView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(borderView)
-        NSLayoutConstraint.activate(
-            [
-                borderView.leadingAnchor.constraint(equalTo: leadingAnchor),
-                borderView.trailingAnchor.constraint(equalTo: trailingAnchor),
-                borderView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 8),
-                borderView.heightAnchor.constraint(equalToConstant: height),
-            ]
-        )
-    }
-    
-    
-    func enablePasswordToggle(){
-        passwordTottleButton.setImage(UIImage(systemName: "eye.fill"), for: .normal)
-        passwordTottleButton.setImage(UIImage(systemName: "eye.slash.fill"), for: .selected)
-        passwordTottleButton.tintColor = .systemBackground
-        passwordTottleButton.addTarget(self, action: #selector(togglePasswordView), for: .touchUpInside)
-        rightView = passwordTottleButton
-        rightViewMode = .always
-    }
-    
-    @objc
-    func togglePasswordView(_ sender: Any){
-        isSecureTextEntry.toggle()
-        passwordTottleButton.isSelected.toggle()
-    }
-}
 
 extension UIView{
     func addSubviews(_ subviews: UIView...){
@@ -103,5 +69,9 @@ extension UIStackView{
     func addArregendSubViews(_ subviews: UIView...){
         subviews.forEach(addArrangedSubview)
     }
+}
+
+extension UIColor {
+    static var blueTest = UIColor(red: 24/255, green: 20/255, blue: 36/255, alpha: 1)
 }
 

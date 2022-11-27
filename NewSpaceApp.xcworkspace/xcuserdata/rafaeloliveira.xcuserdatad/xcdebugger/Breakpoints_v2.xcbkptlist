@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5A4F32B6-3B27-4C46-AB61-7BD804673746"
+            uuid = "B39BDFF2-6702-4A19-90FF-1BA3AB9040A5"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "NewSpaceApp/View/PlanetsViewController.swift"
+            filePath = "NewSpaceApp/Presenter/PlanetsPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
-            landmarkName = "additional()"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "successHandler()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

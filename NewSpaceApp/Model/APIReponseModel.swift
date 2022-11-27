@@ -28,3 +28,14 @@ struct Moons: Codable{
     let moon: String
     
 }
+
+enum SolarSystemPlanets: String {
+    case mercury = "Mercury"
+    case venus = "Venus"
+    case earth = "Earth"
+    case mars = "Mars"
+    case juptier = "Jupiter"
+    case saturn = "Saturn"
+    case uranus = "Uranus"
+    case netptune = "Neptune"
+}

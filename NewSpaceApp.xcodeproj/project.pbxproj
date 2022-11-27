@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		274460A32930762A005ADED8 /* PlanetsViewController+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274460A22930762A005ADED8 /* PlanetsViewController+DataSource.swift */; };
 		2797C85C28CC38C900CC5911 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2797C85B28CC38C900CC5911 /* AppDelegate.swift */; };
 		2797C85E28CC38C900CC5911 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2797C85D28CC38C900CC5911 /* SceneDelegate.swift */; };
 		2797C86028CC38C900CC5911 /* PlanetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2797C85F28CC38C900CC5911 /* PlanetsViewController.swift */; };
 		2797C86528CC38CA00CC5911 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2797C86428CC38CA00CC5911 /* Assets.xcassets */; };
 		2797C86828CC38CA00CC5911 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2797C86628CC38CA00CC5911 /* LaunchScreen.storyboard */; };
 		2797C87328CCBF1A00CC5911 /* CodableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2797C87228CCBF1A00CC5911 /* CodableView.swift */; };
-		2797C87628CCCDF600CC5911 /* PlanetsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2797C87528CCCDF600CC5911 /* PlanetsTableViewCell.swift */; };
+		2797C87628CCCDF600CC5911 /* PlanetsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2797C87528CCCDF600CC5911 /* PlanetsCollectionViewCell.swift */; };
 		27C8A79928E66BDB0083EC83 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C8A79828E66BDB0083EC83 /* APIClient.swift */; };
 		27C8A79B28E66BE80083EC83 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C8A79A28E66BE80083EC83 /* Endpoints.swift */; };
 		27C8A79D28E66C590083EC83 /* APIClientProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C8A79C28E66C590083EC83 /* APIClientProtocols.swift */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		274460A22930762A005ADED8 /* PlanetsViewController+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlanetsViewController+DataSource.swift"; sourceTree = "<group>"; };
 		2797C85828CC38C900CC5911 /* NewSpaceApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewSpaceApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2797C85B28CC38C900CC5911 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2797C85D28CC38C900CC5911 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -36,7 +38,7 @@
 		2797C86728CC38CA00CC5911 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2797C86928CC38CA00CC5911 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2797C87228CCBF1A00CC5911 /* CodableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableView.swift; sourceTree = "<group>"; };
-		2797C87528CCCDF600CC5911 /* PlanetsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetsTableViewCell.swift; sourceTree = "<group>"; };
+		2797C87528CCCDF600CC5911 /* PlanetsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetsCollectionViewCell.swift; sourceTree = "<group>"; };
 		27C8A79828E66BDB0083EC83 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		27C8A79A28E66BE80083EC83 /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
 		27C8A79C28E66C590083EC83 /* APIClientProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientProtocols.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 			children = (
 				2797C85F28CC38C900CC5911 /* PlanetsViewController.swift */,
 				2797C87428CCCDD700CC5911 /* Cell */,
+				274460A22930762A005ADED8 /* PlanetsViewController+DataSource.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -131,7 +134,7 @@
 		2797C87428CCCDD700CC5911 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				2797C87528CCCDF600CC5911 /* PlanetsTableViewCell.swift */,
+				2797C87528CCCDF600CC5911 /* PlanetsCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -318,11 +321,12 @@
 				27E8C756291F19C6000CF589 /* ApplicationCoordinator.swift in Sources */,
 				2797C87328CCBF1A00CC5911 /* CodableView.swift in Sources */,
 				27E8C754291F1984000CF589 /* CoordinatorProtocol.swift in Sources */,
-				2797C87628CCCDF600CC5911 /* PlanetsTableViewCell.swift in Sources */,
+				2797C87628CCCDF600CC5911 /* PlanetsCollectionViewCell.swift in Sources */,
 				27E8C752291F0E85000CF589 /* PlanetsRepository.swift in Sources */,
 				27CCE7F628D2B25C0047CBDF /* Extension.swift in Sources */,
 				2797C85C28CC38C900CC5911 /* AppDelegate.swift in Sources */,
 				27C8A79B28E66BE80083EC83 /* Endpoints.swift in Sources */,
+				274460A32930762A005ADED8 /* PlanetsViewController+DataSource.swift in Sources */,
 				2797C85E28CC38C900CC5911 /* SceneDelegate.swift in Sources */,
 				27C8A7A228E670A60083EC83 /* APIReponseModel.swift in Sources */,
 			);
