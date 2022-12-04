@@ -13,10 +13,10 @@ import SnapKit
 class PlanetsCollectionViewCell: UICollectionViewCell, CodableViews {
     
     static let identifier = String(describing: PlanetsCollectionViewCell.self)
+    
     let width: CGFloat = 2
     let height: CGFloat = 2
     let offset: CGFloat = 5
-    
     
     lazy var dotViewRight: UIView = {
         let view = UIView()
@@ -55,10 +55,13 @@ class PlanetsCollectionViewCell: UICollectionViewCell, CodableViews {
 extension PlanetsCollectionViewCell {
     
     func setupHierachy() {
+        
         addSubviews(label, dotViewRight, dotViewLeft)
+        
     }
     
     func setupConstraints() {
+        
         label.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }

@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 
-class PlanetsViewController: UIViewController, CodableViews, UICollectionViewDelegate, UICollectionViewDataSource {
+class PlanetsViewController: UIViewController, CodableViews {
     
     var presenter: PlanetsPresenter
     
@@ -40,16 +40,9 @@ class PlanetsViewController: UIViewController, CodableViews, UICollectionViewDel
         return view
     }()
     
-    lazy var collection: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 16
-        layout.scrollDirection = .vertical
-        let view = UICollectionView(frame: .zero, collectionViewLayout: layout.createLayoutPortrait())
-        view.delegate = self
-        view.dataSource = self
-        view.isScrollEnabled = false
-        view.register(PlanetsCollectionViewCell.self, forCellWithReuseIdentifier: PlanetsCollectionViewCell.identifier)
-        return view
+    lazy var collection: PlanetsCollectionView = {
+        let collection = PlanetsCollectionView()
+        return collection
     }()
     
     init(presenter: PlanetsPresenter) {

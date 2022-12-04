@@ -7,16 +7,80 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B39BDFF2-6702-4A19-90FF-1BA3AB9040A5"
+            uuid = "AB621CDD-60D4-44EE-96EB-01C55166DB3A"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "NewSpaceApp/Presenter/PlanetsPresenter.swift"
+            filePath = "NewSpaceApp/View/Cell/PlanetsCollectionView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "successHandler()"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "PlanetsCollectionView"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "AB621CDD-60D4-44EE-96EB-01C55166DB3A - 39f790810a6ffce8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NewSpaceApp.PlanetsCollectionView.__allocating_init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;NewSpaceApp.PlanetsCollectionView&gt;"
+                  moduleName = "NewSpaceApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rafaeloliveira/Developer/iOSDev/Projects/NewSpaceApp/NewSpaceApp/View/Cell/PlanetsCollectionView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "20">
+               </Location>
+               <Location
+                  uuid = "AB621CDD-60D4-44EE-96EB-01C55166DB3A - de884acf7436faa2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NewSpaceApp.PlanetsCollectionView.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;NewSpaceApp.PlanetsCollectionView&gt;"
+                  moduleName = "NewSpaceApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rafaeloliveira/Developer/iOSDev/Projects/NewSpaceApp/NewSpaceApp/View/Cell/PlanetsCollectionView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "52">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B10F3953-F845-440B-937E-39FDFAB009A0"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NewSpaceApp/View/PlanetsListDataSource.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
+            landmarkName = "filterPlanets()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A55AB82F-6F2F-4C23-999B-FE0A3D30D5B5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NewSpaceApp/View/PlanetsListDataSource.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "orderPlanetsInOrder(range:planets:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

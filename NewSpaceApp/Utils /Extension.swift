@@ -75,3 +75,18 @@ extension UIColor {
     static var blueTest = UIColor(red: 24/255, green: 20/255, blue: 36/255, alpha: 1)
 }
 
+protocol Reusable: AnyObject {
+    static var reuseIdentifier: String { get }
+}
+
+extension Reusable {
+    static var identifier: String {
+        return String(describing: self)
+    }
+}
+
+extension UICollectionView {
+    final func register<T: UICollectionViewCell>(cellType: T.Type) where T: Reusable {
+        self.register(cellType.self, forCellWithReuseIdentifier: cellType.reuseIdentifier)
+    }
+}
