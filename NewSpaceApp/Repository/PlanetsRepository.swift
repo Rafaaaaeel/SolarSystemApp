@@ -8,7 +8,8 @@
 import Foundation
 
 protocol PlanetsRepositoryProtocol {
-    func fetchPlanetsData(completion: @escaping (Result<SolarSystem, Error>) -> Void?)
+    func fetchSolarSystemData(completion: @escaping (Result<SolarSystem, Error>) -> Void?)
+    func fetchPlanetData(planet name: String, completion: @escaping (Result<Planet, Error>) -> Void?)
 }
 
 class PlanetsRepository: PlanetsRepositoryProtocol {
@@ -19,8 +20,8 @@ class PlanetsRepository: PlanetsRepositoryProtocol {
         self.apiClient = apiClient
     }
 
-    func fetchPlanetsData(completion: @escaping (Result<SolarSystem, Error>) -> Void?) {
-        apiClient.fetchPlanetsData{ result in
+    func fetchSolarSystemData(completion: @escaping (Result<SolarSystem, Error>) -> Void?) {
+        apiClient.fetchSolarSystemData{ result in
             switch result {
             case .success(let solarSystem):
                 completion(.success(solarSystem))
@@ -29,4 +30,16 @@ class PlanetsRepository: PlanetsRepositoryProtocol {
             }
         }
     }
+    
+    func fetchPlanetData(planet name: String, completion: @escaping (Result<Planet, Error>) -> Void?) {
+        apiClient.fetchPlanetData(planet: name) { result in
+            switch result {
+            case .success(let planet):
+                completion(.success(planet))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
 }

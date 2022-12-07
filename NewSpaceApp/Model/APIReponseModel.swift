@@ -9,11 +9,11 @@ import Foundation
 
 struct SolarSystem: Codable{
     
-    let bodies: [Planets]
+    let bodies: [Planet]
     
 }
 
-struct Planets: Codable{
+struct Planet: Codable{
     
     let id: String
     let name: String
@@ -39,3 +39,4 @@ enum SolarSystemPlanets: String {
     case uranus = "Uranus"
     case netptune = "Neptune"
 }
+

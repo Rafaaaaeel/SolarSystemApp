@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 
-class PlanetsViewController: UIViewController, CodableViews {
+class SolarSystemViewController: UIViewController, CodableViews {
     
     var presenter: PlanetsPresenter
     
@@ -37,11 +37,20 @@ class PlanetsViewController: UIViewController, CodableViews {
         view.clipsToBounds = true
         view.layer.borderColor = UIColor.white.cgColor
         view.layer.borderWidth = 1.0
+        view.isHidden = true
+        return view
+    }()
+    
+    lazy var viewSquareShimmer: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 6
+        view.clipsToBounds = true
+        view.backgroundColor = .gray
         return view
     }()
     
     lazy var collection: PlanetsCollectionView = {
-        let collection = PlanetsCollectionView()
+        let collection = PlanetsCollectionView(delegate: self)
         return collection
     }()
     
@@ -63,9 +72,9 @@ class PlanetsViewController: UIViewController, CodableViews {
 
 }
 
-extension PlanetsViewController{
+extension SolarSystemViewController{
     func setupHierachy() {
-        view.addSubviews(titleLabelTop, titleLabelBottom, viewSquare, collection)
+        view.addSubviews(titleLabelTop, titleLabelBottom, viewSquare, collection, viewSquareShimmer)
     }
     
     func setupConstraints() {
@@ -86,6 +95,12 @@ extension PlanetsViewController{
             make.height.equalTo(400)
         }
         
+        viewSquareShimmer.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.width.equalTo(300)
+            make.height.equalTo(300)
+        }
+        
         collection.snp.makeConstraints { make in
             make.bottom.equalToSuperview()
             make.horizontalEdges.equalToSuperview()
@@ -98,5 +113,15 @@ extension PlanetsViewController{
         view.backgroundColor = .blueTest
         presenter.view = self
     }
+    
+}
+
+extension SolarSystemViewController: PlanetsListDataSourceDelegate {
+    
+    func didSelectPlanet(planet: String) {
+        // Here will be called presenter which will call coordinator for planet description screen
+        presenter.greeting(planet: planet)
+    }
+    
     
 }

@@ -19,7 +19,7 @@ class ApplicationCoordinator: Coordinator {
         let repository = PlanetsRepository()
         let Presenter = PlanetsPresenter(repository: repository)
         
-        return PlanetsViewController(presenter: Presenter)
+        return SolarSystemViewController(presenter: Presenter)
     }
     
     

@@ -16,7 +16,7 @@ protocol PlanetsPresenterOutputProtocol {
 class PlanetsPresenter: PlanetsPresenterOutputProtocol {
 
     var repository: PlanetsRepository
-    weak var view: PlanetsViewController?
+    weak var view: SolarSystemViewController?
     
     init(repository: PlanetsRepository) {
         self.repository = repository
@@ -39,6 +39,8 @@ class PlanetsPresenter: PlanetsPresenterOutputProtocol {
     private func successHandler() {
         DispatchQueue.main.async {
             self.view?.collection.source.state = .results
+            self.view?.viewSquareShimmer.isHidden = true
+            self.view?.viewSquare.isHidden = false
             self.view?.collection.reloadData()
         }
     }
@@ -50,7 +52,7 @@ class PlanetsPresenter: PlanetsPresenterOutputProtocol {
     }
     
     internal func fetchPlanetsData(completion: @escaping (Result<SolarSystem, Error>) -> Void?) {
-        repository.fetchPlanetsData() { result in
+        repository.fetchSolarSystemData() { result in
             switch result {
             case .success(let solarSystem):
                 completion(.success(solarSystem))
@@ -62,6 +64,23 @@ class PlanetsPresenter: PlanetsPresenterOutputProtocol {
     
     private func fetchSolarSystemSourceData(solarSystem: SolarSystem) {
         self.view?.collection.add(solarSystem: solarSystem)
+    }
+    
+    internal func greeting(planet: String) {
+        print("This is my planet: \(planet)")
+        
+        repository.fetchPlanetData(planet: planet) { result in
+            switch result {
+            case .success(let planet):
+                if let moons = planet.moons {
+                    for i in 0...moons.count - 1 {
+                        print(moons[i].moon)
+                    }
+                }
+            case .failure(_):
+                break
+            }
+        }
     }
     
 }

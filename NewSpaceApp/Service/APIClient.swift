@@ -16,7 +16,37 @@ class APIClient: PlanetsProtocol{
     private let urlSession = URLSession.shared
     private let jsonDecoder = Utils.jsonDecoder
     
-    func fetchPlanetsData(completion: @escaping (Result<SolarSystem, APIError>) -> Void) {
+    func fetchPlanetData(planet name: String, completion: @escaping (Result<Planet, APIError>) -> Void) {
+        guard let url = URL(string: "\(baseAPIURL)\(name)") else {
+            completion(.failure(.invalidEndpoint))
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+            
+            guard let self = self else { return }
+            
+            guard let httpResponse = response as? HTTPURLResponse, 200..<300 ~= httpResponse.statusCode else {
+                completion(.failure(.invalidResponse))
+                return
+            }
+            
+            guard let data = data else {
+                completion(.failure(.noData))
+                return
+            }
+            
+            if let responseData = try? self.jsonDecoder.decode(Planet.self, from: data){
+                completion(.success(responseData))
+            } else {
+                completion(.failure(.serializationError))
+            }
+
+        }
+        task.resume()
+    }
+    
+    func fetchSolarSystemData(completion: @escaping (Result<SolarSystem, APIError>) -> Void) {
         guard let url = URL(string: baseAPIURL) else {
             completion(.failure(.invalidEndpoint))
             return
@@ -45,6 +75,39 @@ class APIClient: PlanetsProtocol{
         }
         task.resume()
     
+    }
+    
+    private func loadURLAndDecode<D: Decodable>(url: URL, params: [String: String]? = nil, completion: @escaping (Result<D, APIError>) -> ()) {
+        guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
+            completion(.failure(.invalidEndpoint))
+            return
+        }
+        
+        var queryItems = [URLQueryItem(name: "api_key", value: nil)]
+        if let params = params {
+            queryItems.append(contentsOf: params.map { URLQueryItem(name: $0.key, value: $0.value) })
+        }
+        
+        urlComponents.queryItems = queryItems
+        
+        guard let finalURL = urlComponents.url else {
+            completion(.failure(.invalidEndpoint))
+            return
+        }
+        
+        urlSession.dataTask(with: finalURL) { (data, response, error) in
+            if error != nil {
+                self.executeCompletionHandlerInMainThread(with: .failure(.apiError), completion: completion)
+            }
+            
+            
+        }
+    }
+    
+    private func executeCompletionHandlerInMainThread<D:Decodable>(with result: Result<D, APIError>, completion: @escaping (Result<D, APIError>) -> ()) {
+        DispatchQueue.main.async {
+            completion(result)
+        }
     }
     
 }

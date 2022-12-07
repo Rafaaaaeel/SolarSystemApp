@@ -8,7 +8,13 @@
 import Foundation
 import UIKit
 
+protocol PlanetsListDataSourceDelegate: AnyObject{
+    func didSelectPlanet(planet: String)
+}
+
 class PlanetsListDataSource: NSObject {
+    
+    weak var delegate: PlanetsListDataSourceDelegate?
     
     internal enum State {
         case loading
@@ -57,6 +63,7 @@ extension PlanetsListDataSource: UICollectionViewDataSource {
             return cell
         case .results:
             let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: PlanetsCollectionViewCell.identifier, for: indexPath) as! PlanetsCollectionViewCell
+            cell.delegate = self
             if let planet = planets(index: indexPath.row) {
                 cell.config(planet: planet, index: indexPath.row)
             }
@@ -125,4 +132,12 @@ extension PlanetsListDataSource {
         }
         orderPlanetsInOrder(range: solarSystemPlanets.count - 1, planets: solarSystemPlanets)
     }
+}
+
+extension PlanetsListDataSource: PlanetsCollectionViewCellDelegate {
+    
+    func didTouchPlanet(planet: String) {
+        delegate?.didSelectPlanet(planet: planet)
+    }
+    
 }

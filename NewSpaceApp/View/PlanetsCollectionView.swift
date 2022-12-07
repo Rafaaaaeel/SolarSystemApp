@@ -12,11 +12,12 @@ internal class PlanetsCollectionView: UICollectionView {
     
     internal var source: PlanetsListDataSource
     
-    init(source: PlanetsListDataSource = PlanetsListDataSource()) {
+    init(source: PlanetsListDataSource = PlanetsListDataSource(), delegate: PlanetsListDataSourceDelegate?) {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 16
         layout.scrollDirection = .vertical
         self.source = source
+        self.source.delegate = delegate
         super.init(frame: .zero, collectionViewLayout: layout.createLayoutPortrait())
         configure()
     }

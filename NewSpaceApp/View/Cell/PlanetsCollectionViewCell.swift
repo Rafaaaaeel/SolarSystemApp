@@ -8,15 +8,20 @@
 import UIKit
 import SnapKit
 
-
+protocol PlanetsCollectionViewCellDelegate: AnyObject {
+    func didTouchPlanet(planet: String)
+}
 
 class PlanetsCollectionViewCell: UICollectionViewCell, CodableViews {
     
     static let identifier = String(describing: PlanetsCollectionViewCell.self)
     
+    weak var delegate: PlanetsCollectionViewCellDelegate?
+    
     let width: CGFloat = 2
     let height: CGFloat = 2
     let offset: CGFloat = 5
+    var planet: String = ""
     
     lazy var dotViewRight: UIView = {
         let view = UIView()
@@ -41,6 +46,15 @@ class PlanetsCollectionViewCell: UICollectionViewCell, CodableViews {
         return label
     }()
     
+    lazy var planetButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitleColor(.gray, for: .disabled)
+        button.setTitleColor(.white, for: .normal)
+        button.isEnabled = false
+        button.addTarget(self, action: #selector(didPlanetClicked), for: .touchUpInside)
+        return button
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -56,26 +70,26 @@ extension PlanetsCollectionViewCell {
     
     func setupHierachy() {
         
-        addSubviews(label, dotViewRight, dotViewLeft)
+        addSubviews(planetButton, dotViewRight, dotViewLeft)
         
     }
     
     func setupConstraints() {
         
-        label.snp.makeConstraints { make in
+        planetButton.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
         dotViewRight.snp.makeConstraints { make in
-            make.trailing.equalTo(label).offset(offset)
-            make.centerY.equalTo(label)
+            make.trailing.equalTo(planetButton).offset(offset)
+            make.centerY.equalTo(planetButton)
             make.width.equalTo(width)
             make.height.equalTo(height)
         }
         
         dotViewLeft.snp.makeConstraints { make in
-            make.leading.equalTo(label).offset(-offset)
-            make.centerY.equalTo(label)
+            make.leading.equalTo(planetButton).offset(-offset)
+            make.centerY.equalTo(planetButton)
             make.width.equalTo(width)
             make.height.equalTo(height)
         }
@@ -86,13 +100,22 @@ extension PlanetsCollectionViewCell {
 
 extension PlanetsCollectionViewCell {
     func config(planet name: String, index: Int) {
-    
+        self.planet = name
         if index == 0 {
-            label.layer.opacity = 1
+            planetButton.isEnabled = true
         }
         
-        label.text = name
+        planetButton.setTitle(name, for: [])
     }
+}
+
+extension PlanetsCollectionViewCell {
+    
+    
+    @objc func didPlanetClicked() {
+        delegate?.didTouchPlanet(planet: self.planet)
+    }
+    
 }
     
 
