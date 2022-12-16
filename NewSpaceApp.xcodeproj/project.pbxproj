@@ -11,6 +11,7 @@
 		2708CDB8293B8387005CD387 /* PlanetsListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2708CDB7293B8387005CD387 /* PlanetsListDataSource.swift */; };
 		2708CDBA293B927C005CD387 /* PlanetsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2708CDB9293B927C005CD387 /* PlanetsCollectionView.swift */; };
 		277D52CD2940148E008E0DD6 /* PlanetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277D52CC2940148E008E0DD6 /* PlanetViewController.swift */; };
+		277D52CF29440CD2008E0DD6 /* PlanetsListCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277D52CE29440CD2008E0DD6 /* PlanetsListCollectionDelegate.swift */; };
 		2797C85C28CC38C900CC5911 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2797C85B28CC38C900CC5911 /* AppDelegate.swift */; };
 		2797C85E28CC38C900CC5911 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2797C85D28CC38C900CC5911 /* SceneDelegate.swift */; };
 		2797C86028CC38C900CC5911 /* SolarSystemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2797C85F28CC38C900CC5911 /* SolarSystemViewController.swift */; };
@@ -36,6 +37,7 @@
 		2708CDB7293B8387005CD387 /* PlanetsListDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetsListDataSource.swift; sourceTree = "<group>"; };
 		2708CDB9293B927C005CD387 /* PlanetsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetsCollectionView.swift; sourceTree = "<group>"; };
 		277D52CC2940148E008E0DD6 /* PlanetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetViewController.swift; sourceTree = "<group>"; };
+		277D52CE29440CD2008E0DD6 /* PlanetsListCollectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetsListCollectionDelegate.swift; sourceTree = "<group>"; };
 		2797C85828CC38C900CC5911 /* NewSpaceApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewSpaceApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2797C85B28CC38C900CC5911 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2797C85D28CC38C900CC5911 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -123,8 +125,9 @@
 				2797C85F28CC38C900CC5911 /* SolarSystemViewController.swift */,
 				2708CDB9293B927C005CD387 /* PlanetsCollectionView.swift */,
 				2708CDB7293B8387005CD387 /* PlanetsListDataSource.swift */,
-				2797C87428CCCDD700CC5911 /* Cell */,
 				277D52CC2940148E008E0DD6 /* PlanetViewController.swift */,
+				277D52CE29440CD2008E0DD6 /* PlanetsListCollectionDelegate.swift */,
+				2797C87428CCCDD700CC5911 /* Cell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 				2797C87628CCCDF600CC5911 /* PlanetsCollectionViewCell.swift in Sources */,
 				27E8C752291F0E85000CF589 /* PlanetsRepository.swift in Sources */,
 				27CCE7F628D2B25C0047CBDF /* Extension.swift in Sources */,
+				277D52CF29440CD2008E0DD6 /* PlanetsListCollectionDelegate.swift in Sources */,
 				2708CDBA293B927C005CD387 /* PlanetsCollectionView.swift in Sources */,
 				2797C85C28CC38C900CC5911 /* AppDelegate.swift in Sources */,
 				27C8A79B28E66BE80083EC83 /* Endpoints.swift in Sources */,

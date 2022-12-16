@@ -8,8 +8,7 @@
 import UIKit
 import SnapKit
 
-
-class SolarSystemViewController: UIViewController, CodableViews {
+class SolarSystemViewController: UIViewController {
     
     var presenter: PlanetsPresenter
     
@@ -43,9 +42,10 @@ class SolarSystemViewController: UIViewController, CodableViews {
     
     lazy var viewSquareShimmer: UIView = {
         let view = UIView()
-        view.layer.cornerRadius = 6
+        view.layer.cornerRadius = self.view.frame.size.width / 2
         view.clipsToBounds = true
         view.backgroundColor = .gray
+        view.layer.borderWidth = 1.0
         return view
     }()
     
@@ -63,7 +63,6 @@ class SolarSystemViewController: UIViewController, CodableViews {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
 //  MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,13 +71,13 @@ class SolarSystemViewController: UIViewController, CodableViews {
 
 }
 
-extension SolarSystemViewController{
+extension SolarSystemViewController: CodableViews {
+    
     func setupHierachy() {
         view.addSubviews(titleLabelTop, titleLabelBottom, viewSquare, collection, viewSquareShimmer)
     }
-    
+
     func setupConstraints() {
-        
         titleLabelTop.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.topMargin)
             make.horizontalEdges.equalToSuperview()
@@ -91,14 +90,14 @@ extension SolarSystemViewController{
         
         viewSquare.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.width.equalTo(400)
-            make.height.equalTo(400)
+            make.width.equalTo(390)
+            make.height.equalTo(390)
         }
         
         viewSquareShimmer.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.width.equalTo(300)
-            make.height.equalTo(300)
+            make.width.equalTo(390)
+            make.height.equalTo(390)
         }
         
         collection.snp.makeConstraints { make in
@@ -112,16 +111,39 @@ extension SolarSystemViewController{
         collection.backgroundColor = .blueTest
         view.backgroundColor = .blueTest
         presenter.view = self
+        self.setContentScrollView(collection)
     }
     
 }
 
-extension SolarSystemViewController: PlanetsListDataSourceDelegate {
+extension SolarSystemViewController {
     
-    func didSelectPlanet(planet: String) {
-        // Here will be called presenter which will call coordinator for planet description screen
-        presenter.greeting(planet: planet)
+    private func getCurrentVisibleCellRow() -> Int {
+        var visibleRect = CGRect ( )
+        visibleRect.origin = collection.contentOffset
+        visibleRect.size = collection.bounds.size
+        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+        
+        if let indexPath = collection.indexPathForItem(at: visiblePoint) {
+            return indexPath.row
+        }
+        return 0
     }
     
+}
+
+extension SolarSystemViewController: PlanetsListDelegate {
+    
+    func didScroll() {
+        print("YEEEEEEES")
+        print(getCurrentVisibleCellRow())
+    }
+    
+    func didSelectPlanet(at index: Int) {
+        let selectedPlanet = collection.source.solarSystemPlanets[index]
+        print(selectedPlanet)
+    }
+
     
 }
+

@@ -9,8 +9,8 @@ import Foundation
 import UIKit
 
 //  MARK: - UIViewController
-extension UIViewController{
-    func setStatusBar(){
+extension UIViewController {
+    func setStatusBar() {
         let statusBarSize = UIApplication.shared.statusBarFrame.size
         let frame = CGRect(origin: .zero, size: statusBarSize)
         let statusBarView = UIView(frame: frame)
@@ -28,9 +28,9 @@ extension UIViewController{
 }
 
 //  MARK: - UICollectionViewLayout
-extension UICollectionViewLayout{
+extension UICollectionViewLayout {
     
-    func createLayoutPortrait() -> UICollectionViewCompositionalLayout{
+    func createLayoutPortrait() -> UICollectionViewCompositionalLayout {
         // Item
         let item = NSCollectionLayoutItem(
             layoutSize: NSCollectionLayoutSize(
@@ -59,14 +59,13 @@ extension UICollectionViewLayout{
 //  MARK: - UITextField
 
 extension UIView{
-    func addSubviews(_ subviews: UIView...){
+    func addSubviews(_ subviews: UIView...) {
         subviews.forEach(addSubview)
     }
 }
 
 extension UIStackView{
-    
-    func addArregendSubViews(_ subviews: UIView...){
+    func addArregendSubViews(_ subviews: UIView...) {
         subviews.forEach(addArrangedSubview)
     }
 }

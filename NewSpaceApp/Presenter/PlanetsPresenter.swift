@@ -35,21 +35,6 @@ class PlanetsPresenter: PlanetsPresenterOutputProtocol {
             }
         }
     }
-
-    private func successHandler() {
-        DispatchQueue.main.async {
-            self.view?.collection.source.state = .results
-            self.view?.viewSquareShimmer.isHidden = true
-            self.view?.viewSquare.isHidden = false
-            self.view?.collection.reloadData()
-        }
-    }
-    
-    private func errorHandler() {
-        DispatchQueue.main.async {
-            self.view?.view.backgroundColor = .red
-        }
-    }
     
     internal func fetchPlanetsData(completion: @escaping (Result<SolarSystem, Error>) -> Void?) {
         repository.fetchSolarSystemData() { result in
@@ -60,10 +45,6 @@ class PlanetsPresenter: PlanetsPresenterOutputProtocol {
                 completion(.failure(error))
             }
         }
-    }
-    
-    private func fetchSolarSystemSourceData(solarSystem: SolarSystem) {
-        self.view?.collection.add(solarSystem: solarSystem)
     }
     
     internal func greeting(planet: String) {
@@ -80,6 +61,31 @@ class PlanetsPresenter: PlanetsPresenterOutputProtocol {
             case .failure(_):
                 break
             }
+        }
+    }
+    
+}
+
+
+// MARK: - Private methods
+extension PlanetsPresenter {
+    
+    private func fetchSolarSystemSourceData(solarSystem: SolarSystem) {
+        self.view?.collection.add(solarSystem: solarSystem)
+    }
+    
+    private func successHandler() {
+        DispatchQueue.main.async {
+            self.view?.collection.source.state = .results
+            self.view?.viewSquareShimmer.isHidden = true
+            self.view?.viewSquare.isHidden = false
+            self.view?.collection.reloadData()
+        }
+    }
+    
+    private func errorHandler() {
+        DispatchQueue.main.async {
+            self.view?.view.backgroundColor = .red
         }
     }
     

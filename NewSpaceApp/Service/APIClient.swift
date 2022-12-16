@@ -104,6 +104,7 @@ class APIClient: PlanetsProtocol{
         }
     }
     
+    // Working on that
     private func executeCompletionHandlerInMainThread<D:Decodable>(with result: Result<D, APIError>, completion: @escaping (Result<D, APIError>) -> ()) {
         DispatchQueue.main.async {
             completion(result)
