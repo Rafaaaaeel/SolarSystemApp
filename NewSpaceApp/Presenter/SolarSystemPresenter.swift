@@ -47,6 +47,7 @@ class SolarSystemPresenter: PlanetsPresenterOutputProtocol {
         }
     }
     
+//  It needs to be refactored later
     internal func fetchPlanetData(planet: String) {
         
         repository.fetchPlanetData(planet: planet) { result in

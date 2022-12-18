@@ -62,6 +62,15 @@ extension UIView{
     func addSubviews(_ subviews: UIView...) {
         subviews.forEach(addSubview)
     }
+    
+    func rotate() {
+        let rotation : CABasicAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
+        rotation.toValue = NSNumber(value: Double.pi * 0.05)
+        rotation.duration = 1
+        rotation.isCumulative = true
+        rotation.repeatCount = Float.greatestFiniteMagnitude
+        self.layer.add(rotation, forKey: "rotationAnimation")
+    }
 }
 
 extension UIStackView{
@@ -71,7 +80,15 @@ extension UIStackView{
 }
 
 extension UIColor {
-    static var blueTest = UIColor(red: 24/255, green: 20/255, blue: 36/255, alpha: 1)
+    static var primaryBackground = UIColor(red: 24/255, green: 20/255, blue: 36/255, alpha: 1)
+    static var mercury = UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1)
+    static var venus = UIColor(red: 228/255, green: 212/255, blue: 176/255, alpha: 1)
+    static var earth = UIColor(red: 112/255, green: 148/255, blue: 212/255, alpha: 1)
+    static var mars = UIColor(red: 237/255, green: 126/255, blue: 84/255, alpha: 1)
+    static var juptier = UIColor(red: 237/255, green: 174/255, blue: 133/255, alpha: 1)
+    static var saturn = UIColor(red: 228/255, green: 212/255, blue: 172/255, alpha: 1)
+    static var uranus = UIColor(red: 180/255, green: 220/255, blue: 228/255, alpha: 1)
+    static var neptune = UIColor(red: 75/255, green: 123/255, blue: 252/255, alpha: 1)
 }
 
 protocol Reusable: AnyObject {
@@ -89,3 +106,5 @@ extension UICollectionView {
         self.register(cellType.self, forCellWithReuseIdentifier: cellType.reuseIdentifier)
     }
 }
+
+

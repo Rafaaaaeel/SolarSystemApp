@@ -29,6 +29,7 @@ class SolarSystemViewController: UIViewController {
     
     lazy var viewSquare: SolarSystemView = {
         let view = SolarSystemView()
+        view.rotate()
         return view
     }()
     
@@ -84,9 +85,9 @@ extension SolarSystemViewController: CodableViews {
     }
     
     func additional() {
-        view.backgroundColor = .blueTest
+        view.backgroundColor = .primaryBackground
         self.setContentScrollView(collection)
-        collection.backgroundColor = .blueTest
+        collection.backgroundColor = .primaryBackground
         spinnerLoadView.view.frame = view.frame
         presenter.view = self
     }
