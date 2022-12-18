@@ -53,8 +53,8 @@ class SolarSystemPresenter: PlanetsPresenterOutputProtocol {
             switch result {
             case .success(let planet):
                 if let moons = planet.moons {
-                    for index in 0...moons.count - 1 {
-                        let moon = moons[index].rel.components(separatedBy: "/")
+                    moons.forEach { moon in
+                        let moon = moon.rel.components(separatedBy: "/")
                         let moonName = moon[moon.count - 1]
                         self.repository.fetchPlanetData(planet: moonName) { result in
                             switch result {
@@ -85,9 +85,11 @@ extension SolarSystemPresenter {
     private func successHandler() {
         DispatchQueue.main.async {
             self.view?.collection.source.state = .results
-            self.view?.viewSquareShimmer.isHidden = true
             self.view?.viewSquare.isHidden = false
             self.view?.collection.reloadData()
+            self.view?.spinnerLoadView.willMove(toParent: nil)
+            self.view?.spinnerLoadView.view.removeFromSuperview()
+            self.view?.spinnerLoadView.removeFromParent()
         }
     }
     

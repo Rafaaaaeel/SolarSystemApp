@@ -11,41 +11,24 @@ import SnapKit
 class SolarSystemViewController: UIViewController {
     
     var presenter: SolarSystemPresenter
+
+    let spinnerLoadView = SpinnerViewController()
     
     lazy var titleLabelTop: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.text = "SELECT YOUR"
+        label.text = """
+                    SELECT YOUR
+                    DESTINATION
+                    """
         label.textAlignment = .center
-        label.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        return label
-    }()
-    
-    lazy var titleLabelBottom: UILabel = {
-        let label = UILabel()
-        label.textColor = .white
-        label.text = "DESTINATION"
-        label.textAlignment = .center
+        label.numberOfLines = 0
         label.font = UIFont.preferredFont(forTextStyle: .subheadline)
         return label
     }()
     
     lazy var viewSquare: SolarSystemView = {
         let view = SolarSystemView()
-//        view.layer.cornerRadius = self.view.frame.size.width / 2
-//        view.clipsToBounds = true
-//        view.layer.borderColor = UIColor.white.cgColor
-//        view.layer.borderWidth = 1.0
-//        view.isHidden = true
-        return view
-    }()
-    
-    lazy var viewSquareShimmer: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = self.view.frame.size.width / 2
-        view.clipsToBounds = true
-        view.backgroundColor = .gray
-        view.layer.borderWidth = 1.0
         return view
     }()
     
@@ -74,27 +57,20 @@ class SolarSystemViewController: UIViewController {
 extension SolarSystemViewController: CodableViews {
     
     func setupHierachy() {
-        view.addSubviews(titleLabelTop, titleLabelBottom, viewSquare, collection, viewSquareShimmer)
+        view.addSubviews(titleLabelTop, viewSquare, collection)
+        addChild(spinnerLoadView)
+        view.addSubview(spinnerLoadView.view)
+        spinnerLoadView.didMove(toParent: self)
     }
 
     func setupConstraints() {
-        titleLabelTop.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.topMargin)
-            make.horizontalEdges.equalToSuperview()
-        }
         
-        titleLabelBottom.snp.makeConstraints { make in
-            make.top.equalTo(titleLabelTop.snp.bottom)
+        titleLabelTop.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.topMargin).inset(16)
             make.horizontalEdges.equalToSuperview()
         }
         
         viewSquare.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-            make.width.equalTo(390)
-            make.height.equalTo(390)
-        }
-        
-        viewSquareShimmer.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.width.equalTo(390)
             make.height.equalTo(390)
@@ -108,10 +84,11 @@ extension SolarSystemViewController: CodableViews {
     }
     
     func additional() {
-        collection.backgroundColor = .blueTest
         view.backgroundColor = .blueTest
-        presenter.view = self
         self.setContentScrollView(collection)
+        collection.backgroundColor = .blueTest
+        spinnerLoadView.view.frame = view.frame
+        presenter.view = self
     }
     
 }
@@ -145,6 +122,5 @@ extension SolarSystemViewController: PlanetsListDelegate {
         presenter.fetchPlanetData(planet: selectedPlanet)
     }
 
-    
 }
 
