@@ -9,11 +9,11 @@ import Foundation
 
 struct SolarSystem: Codable{
     
-    let bodies: [Planet]
+    let bodies: [Body]
     
 }
 
-struct Planet: Codable{
+struct Body: Codable{
     
     let id: String
     let name: String
@@ -26,7 +26,7 @@ struct Planet: Codable{
 struct Moons: Codable{
     
     let moon: String
-    
+    let rel: String
 }
 
 enum SolarSystemPlanets: String {

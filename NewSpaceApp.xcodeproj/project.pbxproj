@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		270261C8294D83BC0075D729 /* SolarSystemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270261C7294D83BC0075D729 /* SolarSystemView.swift */; };
 		2708CDB6293B694C005CD387 /* PlanetsViewShimmerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2708CDB5293B694C005CD387 /* PlanetsViewShimmerCollectionViewCell.swift */; };
 		2708CDB8293B8387005CD387 /* PlanetsListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2708CDB7293B8387005CD387 /* PlanetsListDataSource.swift */; };
 		2708CDBA293B927C005CD387 /* PlanetsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2708CDB9293B927C005CD387 /* PlanetsCollectionView.swift */; };
@@ -24,15 +25,16 @@
 		27C8A79D28E66C590083EC83 /* APIClientProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C8A79C28E66C590083EC83 /* APIClientProtocols.swift */; };
 		27C8A79F28E66E120083EC83 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C8A79E28E66E120083EC83 /* Utils.swift */; };
 		27C8A7A228E670A60083EC83 /* APIReponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C8A7A128E670A50083EC83 /* APIReponseModel.swift */; };
-		27C8A7A528E677AE0083EC83 /* PlanetsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C8A7A428E677AE0083EC83 /* PlanetsPresenter.swift */; };
+		27C8A7A528E677AE0083EC83 /* SolarSystemPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C8A7A428E677AE0083EC83 /* SolarSystemPresenter.swift */; };
 		27CCE7F628D2B25C0047CBDF /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CCE7F528D2B25C0047CBDF /* Extension.swift */; };
-		27E8C752291F0E85000CF589 /* PlanetsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E8C751291F0E85000CF589 /* PlanetsRepository.swift */; };
+		27E8C752291F0E85000CF589 /* SolarSystemRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E8C751291F0E85000CF589 /* SolarSystemRepository.swift */; };
 		27E8C754291F1984000CF589 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E8C753291F1984000CF589 /* CoordinatorProtocol.swift */; };
 		27E8C756291F19C6000CF589 /* ApplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E8C755291F19C6000CF589 /* ApplicationCoordinator.swift */; };
 		A5B06BF5CBCB7BFCB5D9CAF2 /* Pods_NewSpaceApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3428DD421EAB8B9523D2BE4C /* Pods_NewSpaceApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		270261C7294D83BC0075D729 /* SolarSystemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarSystemView.swift; sourceTree = "<group>"; };
 		2708CDB5293B694C005CD387 /* PlanetsViewShimmerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetsViewShimmerCollectionViewCell.swift; sourceTree = "<group>"; };
 		2708CDB7293B8387005CD387 /* PlanetsListDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetsListDataSource.swift; sourceTree = "<group>"; };
 		2708CDB9293B927C005CD387 /* PlanetsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetsCollectionView.swift; sourceTree = "<group>"; };
@@ -52,9 +54,9 @@
 		27C8A79C28E66C590083EC83 /* APIClientProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientProtocols.swift; sourceTree = "<group>"; };
 		27C8A79E28E66E120083EC83 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		27C8A7A128E670A50083EC83 /* APIReponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIReponseModel.swift; sourceTree = "<group>"; };
-		27C8A7A428E677AE0083EC83 /* PlanetsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetsPresenter.swift; sourceTree = "<group>"; };
+		27C8A7A428E677AE0083EC83 /* SolarSystemPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarSystemPresenter.swift; sourceTree = "<group>"; };
 		27CCE7F528D2B25C0047CBDF /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
-		27E8C751291F0E85000CF589 /* PlanetsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetsRepository.swift; sourceTree = "<group>"; };
+		27E8C751291F0E85000CF589 /* SolarSystemRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarSystemRepository.swift; sourceTree = "<group>"; };
 		27E8C753291F1984000CF589 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		27E8C755291F19C6000CF589 /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
 		3428DD421EAB8B9523D2BE4C /* Pods_NewSpaceApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NewSpaceApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,6 +76,67 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		270261C0294D80AD0075D729 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2797C85F28CC38C900CC5911 /* SolarSystemViewController.swift */,
+				270261C1294D80BA0075D729 /* Collection */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		270261C1294D80BA0075D729 /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				2708CDB9293B927C005CD387 /* PlanetsCollectionView.swift */,
+				270261C3294D80DE0075D729 /* Delegate */,
+				270261C2294D80D80075D729 /* DataSource */,
+				2797C87428CCCDD700CC5911 /* Cell */,
+			);
+			path = Collection;
+			sourceTree = "<group>";
+		};
+		270261C2294D80D80075D729 /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				2708CDB7293B8387005CD387 /* PlanetsListDataSource.swift */,
+			);
+			path = DataSource;
+			sourceTree = "<group>";
+		};
+		270261C3294D80DE0075D729 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				277D52CE29440CD2008E0DD6 /* PlanetsListCollectionDelegate.swift */,
+			);
+			path = Delegate;
+			sourceTree = "<group>";
+		};
+		270261C4294D80FE0075D729 /* SolarSystem */ = {
+			isa = PBXGroup;
+			children = (
+				270261C6294D82F70075D729 /* View */,
+				270261C0294D80AD0075D729 /* Controller */,
+			);
+			path = SolarSystem;
+			sourceTree = "<group>";
+		};
+		270261C5294D815B0075D729 /* Planet */ = {
+			isa = PBXGroup;
+			children = (
+				277D52CC2940148E008E0DD6 /* PlanetViewController.swift */,
+			);
+			path = Planet;
+			sourceTree = "<group>";
+		};
+		270261C6294D82F70075D729 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				270261C7294D83BC0075D729 /* SolarSystemView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		2797C84F28CC38C900CC5911 = {
 			isa = PBXGroup;
 			children = (
@@ -122,12 +185,8 @@
 		2797C87028CC391600CC5911 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2797C85F28CC38C900CC5911 /* SolarSystemViewController.swift */,
-				2708CDB9293B927C005CD387 /* PlanetsCollectionView.swift */,
-				2708CDB7293B8387005CD387 /* PlanetsListDataSource.swift */,
-				277D52CC2940148E008E0DD6 /* PlanetViewController.swift */,
-				277D52CE29440CD2008E0DD6 /* PlanetsListCollectionDelegate.swift */,
-				2797C87428CCCDD700CC5911 /* Cell */,
+				270261C5294D815B0075D729 /* Planet */,
+				270261C4294D80FE0075D729 /* SolarSystem */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -164,7 +223,7 @@
 		27C8A79728E66BCF0083EC83 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				27E8C751291F0E85000CF589 /* PlanetsRepository.swift */,
+				27E8C751291F0E85000CF589 /* SolarSystemRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -180,7 +239,7 @@
 		27C8A7A328E677A10083EC83 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				27C8A7A428E677AE0083EC83 /* PlanetsPresenter.swift */,
+				27C8A7A428E677AE0083EC83 /* SolarSystemPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -329,15 +388,16 @@
 				27C8A79F28E66E120083EC83 /* Utils.swift in Sources */,
 				2797C86028CC38C900CC5911 /* SolarSystemViewController.swift in Sources */,
 				27C8A79928E66BDB0083EC83 /* APIClient.swift in Sources */,
-				27C8A7A528E677AE0083EC83 /* PlanetsPresenter.swift in Sources */,
+				27C8A7A528E677AE0083EC83 /* SolarSystemPresenter.swift in Sources */,
 				27E8C756291F19C6000CF589 /* ApplicationCoordinator.swift in Sources */,
 				2708CDB8293B8387005CD387 /* PlanetsListDataSource.swift in Sources */,
 				2797C87328CCBF1A00CC5911 /* CodableView.swift in Sources */,
 				277D52CD2940148E008E0DD6 /* PlanetViewController.swift in Sources */,
+				270261C8294D83BC0075D729 /* SolarSystemView.swift in Sources */,
 				27E8C754291F1984000CF589 /* CoordinatorProtocol.swift in Sources */,
 				2708CDB6293B694C005CD387 /* PlanetsViewShimmerCollectionViewCell.swift in Sources */,
 				2797C87628CCCDF600CC5911 /* PlanetsCollectionViewCell.swift in Sources */,
-				27E8C752291F0E85000CF589 /* PlanetsRepository.swift in Sources */,
+				27E8C752291F0E85000CF589 /* SolarSystemRepository.swift in Sources */,
 				27CCE7F628D2B25C0047CBDF /* Extension.swift in Sources */,
 				277D52CF29440CD2008E0DD6 /* PlanetsListCollectionDelegate.swift in Sources */,
 				2708CDBA293B927C005CD387 /* PlanetsCollectionView.swift in Sources */,

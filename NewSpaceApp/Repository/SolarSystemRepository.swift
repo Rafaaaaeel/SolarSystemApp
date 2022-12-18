@@ -7,12 +7,12 @@
 
 import Foundation
 
-protocol PlanetsRepositoryProtocol {
+protocol SolarSystemRepositoryProtocol {
     func fetchSolarSystemData(completion: @escaping (Result<SolarSystem, Error>) -> Void?)
-    func fetchPlanetData(planet name: String, completion: @escaping (Result<Planet, Error>) -> Void?)
+    func fetchPlanetData(planet name: String, completion: @escaping (Result<Body, Error>) -> Void?)
 }
 
-class PlanetsRepository: PlanetsRepositoryProtocol {
+class SolarSystemRepository: SolarSystemRepositoryProtocol {
 
     private var apiClient: APIClient
     
@@ -31,7 +31,7 @@ class PlanetsRepository: PlanetsRepositoryProtocol {
         }
     }
     
-    func fetchPlanetData(planet name: String, completion: @escaping (Result<Planet, Error>) -> Void?) {
+    func fetchPlanetData(planet name: String, completion: @escaping (Result<Body, Error>) -> Void?) {
         apiClient.fetchPlanetData(planet: name) { result in
             switch result {
             case .success(let planet):

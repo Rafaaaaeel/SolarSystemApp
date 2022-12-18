@@ -13,12 +13,12 @@ protocol PlanetsPresenterOutputProtocol {
     func fetchPlanetsData(completion: @escaping (Result<SolarSystem, Error>) -> Void?)
 }
 
-class PlanetsPresenter: PlanetsPresenterOutputProtocol {
+class SolarSystemPresenter: PlanetsPresenterOutputProtocol {
 
-    var repository: PlanetsRepository
+    var repository: SolarSystemRepository
     weak var view: SolarSystemViewController?
     
-    init(repository: PlanetsRepository) {
+    init(repository: SolarSystemRepository) {
         self.repository = repository
         self.fetchSolarSystem()
     }
@@ -47,15 +47,23 @@ class PlanetsPresenter: PlanetsPresenterOutputProtocol {
         }
     }
     
-    internal func greeting(planet: String) {
-        print("This is my planet: \(planet)")
+    internal func fetchPlanetData(planet: String) {
         
         repository.fetchPlanetData(planet: planet) { result in
             switch result {
             case .success(let planet):
                 if let moons = planet.moons {
-                    for i in 0...moons.count - 1 {
-                        print(moons[i].moon)
+                    for index in 0...moons.count - 1 {
+                        let moon = moons[index].rel.components(separatedBy: "/")
+                        let moonName = moon[moon.count - 1]
+                        self.repository.fetchPlanetData(planet: moonName) { result in
+                            switch result {
+                            case .success(let moon):
+                                print("------------> \(moon.englishName)")
+                            case .failure(_):
+                                break
+                            }
+                        }
                     }
                 }
             case .failure(_):
@@ -68,7 +76,7 @@ class PlanetsPresenter: PlanetsPresenterOutputProtocol {
 
 
 // MARK: - Private methods
-extension PlanetsPresenter {
+extension SolarSystemPresenter {
     
     private func fetchSolarSystemSourceData(solarSystem: SolarSystem) {
         self.view?.collection.add(solarSystem: solarSystem)

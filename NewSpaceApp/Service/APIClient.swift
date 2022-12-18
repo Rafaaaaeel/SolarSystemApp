@@ -16,7 +16,7 @@ class APIClient: PlanetsProtocol{
     private let urlSession = URLSession.shared
     private let jsonDecoder = Utils.jsonDecoder
     
-    func fetchPlanetData(planet name: String, completion: @escaping (Result<Planet, APIError>) -> Void) {
+    func fetchPlanetData(planet name: String, completion: @escaping (Result<Body, APIError>) -> Void) {
         guard let url = URL(string: "\(baseAPIURL)\(name)") else {
             completion(.failure(.invalidEndpoint))
             return
@@ -36,7 +36,7 @@ class APIClient: PlanetsProtocol{
                 return
             }
             
-            if let responseData = try? self.jsonDecoder.decode(Planet.self, from: data){
+            if let responseData = try? self.jsonDecoder.decode(Body.self, from: data){
                 completion(.success(responseData))
             } else {
                 completion(.failure(.serializationError))
@@ -77,6 +77,7 @@ class APIClient: PlanetsProtocol{
     
     }
     
+    
     private func loadURLAndDecode<D: Decodable>(url: URL, params: [String: String]? = nil, completion: @escaping (Result<D, APIError>) -> ()) {
         guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
             completion(.failure(.invalidEndpoint))
@@ -104,7 +105,6 @@ class APIClient: PlanetsProtocol{
         }
     }
     
-    // Working on that
     private func executeCompletionHandlerInMainThread<D:Decodable>(with result: Result<D, APIError>, completion: @escaping (Result<D, APIError>) -> ()) {
         DispatchQueue.main.async {
             completion(result)

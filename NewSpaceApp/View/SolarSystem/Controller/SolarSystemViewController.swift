@@ -10,7 +10,7 @@ import SnapKit
 
 class SolarSystemViewController: UIViewController {
     
-    var presenter: PlanetsPresenter
+    var presenter: SolarSystemPresenter
     
     lazy var titleLabelTop: UILabel = {
         let label = UILabel()
@@ -30,13 +30,13 @@ class SolarSystemViewController: UIViewController {
         return label
     }()
     
-    lazy var viewSquare: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = self.view.frame.size.width / 2
-        view.clipsToBounds = true
-        view.layer.borderColor = UIColor.white.cgColor
-        view.layer.borderWidth = 1.0
-        view.isHidden = true
+    lazy var viewSquare: SolarSystemView = {
+        let view = SolarSystemView()
+//        view.layer.cornerRadius = self.view.frame.size.width / 2
+//        view.clipsToBounds = true
+//        view.layer.borderColor = UIColor.white.cgColor
+//        view.layer.borderWidth = 1.0
+//        view.isHidden = true
         return view
     }()
     
@@ -54,7 +54,7 @@ class SolarSystemViewController: UIViewController {
         return collection
     }()
     
-    init(presenter: PlanetsPresenter) {
+    init(presenter: SolarSystemPresenter) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
@@ -142,6 +142,7 @@ extension SolarSystemViewController: PlanetsListDelegate {
     func didSelectPlanet(at index: Int) {
         let selectedPlanet = collection.source.solarSystemPlanets[index]
         print(selectedPlanet)
+        presenter.fetchPlanetData(planet: selectedPlanet)
     }
 
     

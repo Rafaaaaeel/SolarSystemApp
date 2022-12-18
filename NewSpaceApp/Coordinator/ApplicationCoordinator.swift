@@ -16,8 +16,8 @@ class ApplicationCoordinator: Coordinator {
     }
     
     private func setupViewController() -> UIViewController{
-        let repository = PlanetsRepository()
-        let Presenter = PlanetsPresenter(repository: repository)
+        let repository = SolarSystemRepository()
+        let Presenter = SolarSystemPresenter(repository: repository)
         
         return SolarSystemViewController(presenter: Presenter)
     }
