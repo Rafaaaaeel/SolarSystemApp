@@ -63,13 +63,15 @@ extension UIView{
         subviews.forEach(addSubview)
     }
     
-    func rotate() {
-        let rotation : CABasicAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
-        rotation.toValue = NSNumber(value: Double.pi * 0.05)
-        rotation.duration = 1
-        rotation.isCumulative = true
-        rotation.repeatCount = Float.greatestFiniteMagnitude
-        self.layer.add(rotation, forKey: "rotationAnimation")
+    func rotate(isOn: Bool) {
+        if isOn {
+            let rotation : CABasicAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
+            rotation.toValue = NSNumber(value: Double.pi * 0.05)
+            rotation.duration = 1
+            rotation.isCumulative = true
+            rotation.repeatCount = Float.greatestFiniteMagnitude
+            self.layer.add(rotation, forKey: "rotationAnimation")
+        }
     }
 }
 

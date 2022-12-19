@@ -86,11 +86,13 @@ extension SolarSystemPresenter {
     private func successHandler() {
         DispatchQueue.main.async {
             self.view?.collection.source.state = .results
-            self.view?.viewSquare.isHidden = false
+            self.view?.solarSystemView.isHidden = false
             self.view?.collection.reloadData()
             self.view?.spinnerLoadView.willMove(toParent: nil)
             self.view?.spinnerLoadView.view.removeFromSuperview()
             self.view?.spinnerLoadView.removeFromParent()
+            self.view?.solarSystemView.rotate(isOn: true)
+            self.view?.solarSystemView.layer.opacity = 1
         }
     }
     

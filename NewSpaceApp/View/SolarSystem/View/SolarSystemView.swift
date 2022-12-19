@@ -10,6 +10,8 @@ import SnapKit
 
 class SolarSystemView: UIView {
     
+    var whichOneIsSelected = 0
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .primaryBackground
@@ -26,7 +28,7 @@ class SolarSystemView: UIView {
 //      Uranos
         let neptune = CGRect(x: 25, y: 25, width: Int(self.frame.width - 50), height: Int(self.frame.height - 50))
         context.setFillColor(UIColor.primaryBackground.cgColor)
-        context.setStrokeColor(UIColor.darkGray.cgColor)
+        context.setStrokeColor(whichOneIsSelected == 7 ? UIColor.white.cgColor : UIColor.darkGray.cgColor)
         context.setLineWidth(1)
         context.addEllipse(in: neptune)
         context.drawPath(using: .fillStroke)
@@ -40,7 +42,7 @@ class SolarSystemView: UIView {
 //      Neptune
         let uranos = CGRect(x: 45, y: 45, width: Int(self.frame.width - 90), height: Int(self.frame.height - 90))
         context.setFillColor(UIColor.primaryBackground.cgColor)
-        context.setStrokeColor(UIColor.darkGray.cgColor)
+        context.setStrokeColor(whichOneIsSelected == 6 ? UIColor.white.cgColor : UIColor.darkGray.cgColor)
         context.setLineWidth(1)
         context.addEllipse(in: uranos)
         context.drawPath(using: .fillStroke)
@@ -140,35 +142,11 @@ class SolarSystemView: UIView {
 //      sun
         let sun = CGRect(x: 180, y: 180, width: 30, height: 30)
         context.setFillColor(UIColor.white.cgColor)
+        context.setShadow(offset: CGSize(width: 0, height:0), blur: 40, color: CGColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1))
         context.setLineWidth(1)
         context.addEllipse(in: sun)
         context.drawPath(using: .fillStroke)
         
     }
-    
-    private func createSolarSystemView() {
-        guard let context = UIGraphicsGetCurrentContext() else { return }
-        var x = 165
-        var y = 165
-        
-        var w: CGFloat = 330
-        var h: CGFloat = 330
-        
-        var orbit: CGRect
-        
-        for _ in 0...7 {
-            orbit = CGRect(x: x, y: y, width: Int(self.frame.width - w), height: Int(self.frame.height - h))
-            context.setFillColor(UIColor.primaryBackground.cgColor)
-            context.setStrokeColor(UIColor.white.cgColor)
-            context.setLineWidth(1)
-            context.addEllipse(in: orbit)
-            context.drawPath(using: .fillStroke)
-            
-            x -= 20
-            y -= 20
-            w -= 40
-            h -= 40
 
-        }
-    }
 }

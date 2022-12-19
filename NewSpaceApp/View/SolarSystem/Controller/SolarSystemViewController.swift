@@ -11,10 +11,11 @@ import SnapKit
 class SolarSystemViewController: UIViewController {
     
     var presenter: SolarSystemPresenter
+    var hapticFeedback = UINotificationFeedbackGenerator()
 
     let spinnerLoadView = SpinnerViewController()
     
-    lazy var titleLabelTop: UILabel = {
+    lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.text = """
@@ -27,9 +28,10 @@ class SolarSystemViewController: UIViewController {
         return label
     }()
     
-    lazy var viewSquare: SolarSystemView = {
+    lazy var solarSystemView: SolarSystemView = {
         let view = SolarSystemView()
-        view.rotate()
+        view.rotate(isOn: false)
+        view.layer.opacity = 0.2
         return view
     }()
     
@@ -58,7 +60,7 @@ class SolarSystemViewController: UIViewController {
 extension SolarSystemViewController: CodableViews {
     
     func setupHierachy() {
-        view.addSubviews(titleLabelTop, viewSquare, collection)
+        view.addSubviews(titleLabel, solarSystemView, collection)
         addChild(spinnerLoadView)
         view.addSubview(spinnerLoadView.view)
         spinnerLoadView.didMove(toParent: self)
@@ -66,12 +68,12 @@ extension SolarSystemViewController: CodableViews {
 
     func setupConstraints() {
         
-        titleLabelTop.snp.makeConstraints { make in
+        titleLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.topMargin).inset(16)
             make.horizontalEdges.equalToSuperview()
         }
         
-        viewSquare.snp.makeConstraints { make in
+        solarSystemView.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.width.equalTo(390)
             make.height.equalTo(390)
@@ -80,7 +82,7 @@ extension SolarSystemViewController: CodableViews {
         collection.snp.makeConstraints { make in
             make.bottom.equalToSuperview()
             make.horizontalEdges.equalToSuperview()
-            make.top.equalTo(viewSquare.snp.bottom)
+            make.top.equalTo(solarSystemView.snp.bottom)
         }
     }
     
@@ -120,7 +122,9 @@ extension SolarSystemViewController: PlanetsListDelegate {
     func didSelectPlanet(at index: Int) {
         let selectedPlanet = collection.source.solarSystemPlanets[index]
         print(selectedPlanet)
+        solarSystemView.whichOneIsSelected = index
         presenter.fetchPlanetData(planet: selectedPlanet)
+        hapticFeedback.notificationOccurred(.success)
     }
 
 }
