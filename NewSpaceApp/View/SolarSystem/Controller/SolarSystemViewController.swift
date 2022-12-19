@@ -11,7 +11,7 @@ import SnapKit
 class SolarSystemViewController: UIViewController {
     
     var presenter: SolarSystemPresenter
-    var hapticFeedback = UINotificationFeedbackGenerator()
+    private var hapticFeedback = UINotificationFeedbackGenerator()
 
     let spinnerLoadView = SpinnerViewController()
     
@@ -80,9 +80,9 @@ extension SolarSystemViewController: CodableViews {
         }
         
         collection.snp.makeConstraints { make in
-            make.bottom.equalToSuperview()
+            make.bottom.equalToSuperview().inset(50)
             make.horizontalEdges.equalToSuperview()
-            make.top.equalTo(solarSystemView.snp.bottom)
+            make.height.equalTo(100)
         }
     }
     
@@ -115,7 +115,6 @@ extension SolarSystemViewController {
 extension SolarSystemViewController: PlanetsListDelegate {
     
     func didScroll() {
-        print("YEEEEEEES")
         print(getCurrentVisibleCellRow())
     }
     

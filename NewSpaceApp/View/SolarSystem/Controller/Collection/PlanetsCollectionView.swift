@@ -17,12 +17,11 @@ internal class PlanetsCollectionView: UICollectionView {
          adapter: PlanetsListCollectionDelegate = PlanetsListCollectionDelegate(),
          delegate: PlanetsListDelegate) {
         let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 16
         layout.scrollDirection = .horizontal
         self.source = source
         self.adapter = adapter
         self.adapter.delegate = delegate
-        super.init(frame: .zero, collectionViewLayout: layout.createLayoutPortrait())
+        super.init(frame: .zero, collectionViewLayout: layout)
         configure()
     }
     
@@ -41,7 +40,8 @@ extension PlanetsCollectionView {
     internal func configure() {
         self.dataSource = self.source
         self.delegate = self.adapter
-        self.isScrollEnabled = false
+        self.showsHorizontalScrollIndicator = false
+//        self.isPagingEnabled = true
         self.register(PlanetsCollectionViewCell.self, forCellWithReuseIdentifier: PlanetsCollectionViewCell.identifier)
         self.register(PlanetsViewShimmerCollectionViewCell.self, forCellWithReuseIdentifier: PlanetsViewShimmerCollectionViewCell.identifier)
     }
