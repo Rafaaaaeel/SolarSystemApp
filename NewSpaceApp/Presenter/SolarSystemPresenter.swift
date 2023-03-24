@@ -9,68 +9,71 @@ import Foundation
 import UIKit
 
 protocol PlanetsPresenterOutputProtocol {
+    func fetchPlanet(planet name: String)
     func fetchSolarSystem()
-    func fetchPlanetsData(completion: @escaping (Result<SolarSystem, Error>) -> Void?)
 }
 
-class SolarSystemPresenter: PlanetsPresenterOutputProtocol {
+final class SolarSystemPresenter: PlanetsPresenterOutputProtocol {
 
     var repository: SolarSystemRepository
+    var coordinator: PlanetInfoCoordinator
     weak var view: SolarSystemViewController?
     
-    init(repository: SolarSystemRepository) {
+    init(repository: SolarSystemRepository,
+         coordinator: PlanetInfoCoordinator) {
         self.repository = repository
+        self.coordinator = coordinator
         self.fetchSolarSystem()
     }
-    
-    internal func fetchSolarSystem() {
-        self.fetchPlanetsData() { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let solarSystem):
-                self.fetchSolarSystemSourceData(solarSystem: solarSystem)
-                self.successHandler()
-            case .failure:
-                self.errorHandler()
-            }
-        }
-    }
-    
-    internal func fetchPlanetsData(completion: @escaping (Result<SolarSystem, Error>) -> Void?) {
-        repository.fetchSolarSystemData() { result in
-            switch result {
-            case .success(let solarSystem):
-                completion(.success(solarSystem))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-    }
-    
-//  It needs to be refactored later
-    internal func fetchPlanetData(planet: String) {
         
-        repository.fetchPlanetData(planet: planet) { result in
-            switch result {
-            case .success(let planet):
-                if let moons = planet.moons {
-                    moons.forEach { moon in
-                        let moon = moon.rel.components(separatedBy: "/")
-                        let moonName = moon[moon.count - 1]
-                        self.repository.fetchPlanetData(planet: moonName) { result in
-                            switch result {
-                            case .success(let moon):
-                                print("------------> \(moon.englishName)")
-                            case .failure(_):
-                                break
-                            }
-                        }
-                    }
+    internal func fetchSolarSystem() {
+        Task {
+            await fetchSolarSystemData()
+        }
+    }
+    
+    internal func fetchPlanet(planet name: String) {
+        Task {
+            await fetchPlanetData(planet: name)
+        }
+    }
+    
+    private func fetchSolarSystemData() async {
+        do {
+            let data = try await repository.fetchSolarSystemData()
+            self.fetchSolarSystemSourceData(solarSystem: data)
+            self.successHandler()
+        } catch {
+            self.errorHandler()
+        }
+    }
+    
+    private func fetchPlanetData(planet name: String) async {
+        do {
+            let planets = try await repository.fetchPlanetData(planet: name)
+            if let moons = planets.moons {
+                await fetchMoonsData(moons: moons)
+            }
+        } catch {
+            self.errorHandler()
+        }
+    }
+    
+    private func fetchMoonsData(moons: [Moon]) async {
+        moons.forEach { moon in
+            Task {
+                let rel = moon.rel.components(separatedBy: "/")
+                if let name = rel.last {
+                    let moon = try await self.repository.fetchPlanetData(planet: name)
+                    print("------------> \(moon.englishName)")
                 }
-            case .failure(_):
-                break
             }
         }
+    }
+    
+    internal func callPlanetViewController() {
+        let viewControllrer = coordinator.start()
+//        view?.pushViewController(viewControllrer, animated: true)
     }
     
 }

@@ -99,11 +99,10 @@ extension SolarSystemViewController: CodableViews {
 extension SolarSystemViewController {
     
     private func getCurrentVisibleCellRow() -> Int {
-        var visibleRect = CGRect ( )
+        var visibleRect = CGRect ()
         visibleRect.origin = collection.contentOffset
         visibleRect.size = collection.bounds.size
         let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
-        
         if let indexPath = collection.indexPathForItem(at: visiblePoint) {
             return indexPath.row
         }
@@ -115,15 +114,18 @@ extension SolarSystemViewController {
 extension SolarSystemViewController: PlanetsListDelegate {
     
     func didScroll() {
-        print(getCurrentVisibleCellRow())
+        let index = getCurrentVisibleCellRow()
+        collection.source.index = index
     }
     
     func didSelectPlanet(at index: Int) {
         let selectedPlanet = collection.source.solarSystemPlanets[index]
         print(selectedPlanet)
         solarSystemView.whichOneIsSelected = index
-        presenter.fetchPlanetData(planet: selectedPlanet)
+        presenter.fetchPlanet(planet: selectedPlanet)
         hapticFeedback.notificationOccurred(.success)
+        presenter.callPlanetViewController()
+//        self.pushViewController(PlanetViewController(), animated: true)
     }
 
 }

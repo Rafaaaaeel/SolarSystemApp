@@ -41,11 +41,9 @@ extension PlanetsCollectionView {
         self.dataSource = self.source
         self.delegate = self.adapter
         self.showsHorizontalScrollIndicator = false
-//        self.isPagingEnabled = true
         self.register(PlanetsCollectionViewCell.self, forCellWithReuseIdentifier: PlanetsCollectionViewCell.identifier)
         self.register(PlanetsViewShimmerCollectionViewCell.self, forCellWithReuseIdentifier: PlanetsViewShimmerCollectionViewCell.identifier)
     }
-    
 }
 
 

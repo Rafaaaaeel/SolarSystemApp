@@ -8,7 +8,6 @@
 import Foundation
 
 
-protocol PlanetsProtocol{
-    func fetchSolarSystemData(completion: @escaping (Result<SolarSystem, APIError>) -> Void)
-    func fetchPlanetData(planet name: String, completion: @escaping (Result<Body, APIError>) -> Void)
+protocol APIClienteProtocol{
+    func requestData<D: Decodable>(endpoint: String, params: [String: String]?) async throws -> D
 }

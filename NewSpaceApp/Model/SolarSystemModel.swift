@@ -19,11 +19,11 @@ struct Body: Codable{
     let name: String
     let englishName: String
     let isPlanet: Bool
-    let moons: [Moons]?
+    let moons: [Moon]?
     
 }
 
-struct Moons: Codable{
+struct Moon: Codable{
     
     let moon: String
     let rel: String

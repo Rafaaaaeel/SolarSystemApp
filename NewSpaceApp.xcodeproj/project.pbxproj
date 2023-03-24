@@ -25,9 +25,10 @@
 		27C8A79B28E66BE80083EC83 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C8A79A28E66BE80083EC83 /* Endpoints.swift */; };
 		27C8A79D28E66C590083EC83 /* APIClientProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C8A79C28E66C590083EC83 /* APIClientProtocols.swift */; };
 		27C8A79F28E66E120083EC83 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C8A79E28E66E120083EC83 /* Utils.swift */; };
-		27C8A7A228E670A60083EC83 /* APIReponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C8A7A128E670A50083EC83 /* APIReponseModel.swift */; };
+		27C8A7A228E670A60083EC83 /* SolarSystemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C8A7A128E670A50083EC83 /* SolarSystemModel.swift */; };
 		27C8A7A528E677AE0083EC83 /* SolarSystemPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C8A7A428E677AE0083EC83 /* SolarSystemPresenter.swift */; };
 		27CCE7F628D2B25C0047CBDF /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CCE7F528D2B25C0047CBDF /* Extension.swift */; };
+		27E7F2152952AA1400C8116E /* PlanetInfoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E7F2142952AA1400C8116E /* PlanetInfoCoordinator.swift */; };
 		27E8C752291F0E85000CF589 /* SolarSystemRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E8C751291F0E85000CF589 /* SolarSystemRepository.swift */; };
 		27E8C754291F1984000CF589 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E8C753291F1984000CF589 /* CoordinatorProtocol.swift */; };
 		27E8C756291F19C6000CF589 /* ApplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E8C755291F19C6000CF589 /* ApplicationCoordinator.swift */; };
@@ -55,9 +56,10 @@
 		27C8A79A28E66BE80083EC83 /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
 		27C8A79C28E66C590083EC83 /* APIClientProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientProtocols.swift; sourceTree = "<group>"; };
 		27C8A79E28E66E120083EC83 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
-		27C8A7A128E670A50083EC83 /* APIReponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIReponseModel.swift; sourceTree = "<group>"; };
+		27C8A7A128E670A50083EC83 /* SolarSystemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarSystemModel.swift; sourceTree = "<group>"; };
 		27C8A7A428E677AE0083EC83 /* SolarSystemPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarSystemPresenter.swift; sourceTree = "<group>"; };
 		27CCE7F528D2B25C0047CBDF /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		27E7F2142952AA1400C8116E /* PlanetInfoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetInfoCoordinator.swift; sourceTree = "<group>"; };
 		27E8C751291F0E85000CF589 /* SolarSystemRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarSystemRepository.swift; sourceTree = "<group>"; };
 		27E8C753291F1984000CF589 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		27E8C755291F19C6000CF589 /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
@@ -234,7 +236,7 @@
 		27C8A7A028E670950083EC83 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				27C8A7A128E670A50083EC83 /* APIReponseModel.swift */,
+				27C8A7A128E670A50083EC83 /* SolarSystemModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -252,6 +254,7 @@
 			children = (
 				27E8C755291F19C6000CF589 /* ApplicationCoordinator.swift */,
 				27E8C753291F1984000CF589 /* CoordinatorProtocol.swift */,
+				27E7F2142952AA1400C8116E /* PlanetInfoCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -389,6 +392,7 @@
 			files = (
 				2730BD90294F8B5F006373D6 /* SpinnerViewController.swift in Sources */,
 				27C8A79D28E66C590083EC83 /* APIClientProtocols.swift in Sources */,
+				27E7F2152952AA1400C8116E /* PlanetInfoCoordinator.swift in Sources */,
 				27C8A79F28E66E120083EC83 /* Utils.swift in Sources */,
 				2797C86028CC38C900CC5911 /* SolarSystemViewController.swift in Sources */,
 				27C8A79928E66BDB0083EC83 /* APIClient.swift in Sources */,
@@ -408,7 +412,7 @@
 				2797C85C28CC38C900CC5911 /* AppDelegate.swift in Sources */,
 				27C8A79B28E66BE80083EC83 /* Endpoints.swift in Sources */,
 				2797C85E28CC38C900CC5911 /* SceneDelegate.swift in Sources */,
-				27C8A7A228E670A60083EC83 /* APIReponseModel.swift in Sources */,
+				27C8A7A228E670A60083EC83 /* SolarSystemModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

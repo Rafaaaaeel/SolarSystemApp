@@ -7,12 +7,12 @@
 
 import Foundation
 
-class APIClient: PlanetsProtocol{
+final class APIClient: APIClienteProtocol {
 
     static let shared = APIClient()
     private init() {}
     
-    private let baseAPIURL = "https://api.le-systeme-solaire.net/rest/bodies/"
+    private let baseAPIURL = "https://api.le-systeme-solaire.net/rest/"
     private let urlSession = URLSession.shared
     private let jsonDecoder = Utils.jsonDecoder
     
@@ -45,43 +45,11 @@ class APIClient: PlanetsProtocol{
         }
         task.resume()
     }
-    
-    func fetchSolarSystemData(completion: @escaping (Result<SolarSystem, APIError>) -> Void) {
-        guard let url = URL(string: baseAPIURL) else {
-            completion(.failure(.invalidEndpoint))
-            return
-        }
-        
-        let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
-            
-            guard let self = self else { return }
-            
-            guard let httpResponse = response as? HTTPURLResponse, 200..<300 ~= httpResponse.statusCode else {
-                completion(.failure(.invalidResponse))
-                return
-            }
-            
-            guard let data = data else {
-                completion(.failure(.noData))
-                return
-            }
-            
-            if let responseData = try? self.jsonDecoder.decode(SolarSystem.self, from: data){
-                completion(.success(responseData))
-            } else {
-                completion(.failure(.serializationError))
-            }
 
-        }
-        task.resume()
-    
-    }
-    
-    
-    private func loadURLAndDecode<D: Decodable>(url: URL, params: [String: String]? = nil, completion: @escaping (Result<D, APIError>) -> ()) {
-        guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
-            completion(.failure(.invalidEndpoint))
-            return
+    internal func requestData<D: Decodable>(endpoint: String, params: [String: String]? = nil) async throws -> D {
+
+        guard let url = URL(string: baseAPIURL + endpoint), var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
+            throw APIError.invalidEndpoint
         }
         
         var queryItems = [URLQueryItem(name: "api_key", value: nil)]
@@ -92,23 +60,16 @@ class APIClient: PlanetsProtocol{
         urlComponents.queryItems = queryItems
         
         guard let finalURL = urlComponents.url else {
-            completion(.failure(.invalidEndpoint))
-            return
+            throw APIError.invalidEndpoint
         }
         
-        urlSession.dataTask(with: finalURL) { (data, response, error) in
-            if error != nil {
-                self.executeCompletionHandlerInMainThread(with: .failure(.apiError), completion: completion)
-            }
-            
-            
+        let (data, response) = try await urlSession.data(from: finalURL)
+        
+        guard let httpResponse = response as? HTTPURLResponse, 200..<300 ~= httpResponse.statusCode else {
+            throw APIError.invalidResponse
         }
-    }
-    
-    private func executeCompletionHandlerInMainThread<D:Decodable>(with result: Result<D, APIError>, completion: @escaping (Result<D, APIError>) -> ()) {
-        DispatchQueue.main.async {
-            completion(result)
-        }
+        
+        return try self.jsonDecoder.decode(D.self, from: data)
     }
     
 }

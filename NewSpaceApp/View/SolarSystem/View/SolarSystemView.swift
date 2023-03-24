@@ -15,7 +15,6 @@ class SolarSystemView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .primaryBackground
-        
     }
     
     required init?(coder: NSCoder) {
@@ -124,7 +123,6 @@ class SolarSystemView: UIView {
         context.addEllipse(in: venusPlanet)
         context.drawPath(using: .fillStroke)
         
-
 //      mercury
         let mercury = CGRect(x: 165, y: 165, width: Int(self.frame.width - 330), height: Int(self.frame.height - 330))
         context.setFillColor(UIColor.primaryBackground.cgColor)

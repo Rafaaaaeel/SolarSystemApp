@@ -18,6 +18,7 @@ class PlanetsListDataSource: NSObject {
     internal var state: State = .loading
     internal var solarSystem: SolarSystem? = nil
     internal var solarSystemPlanets: [String] = []
+    var index = 0
     
     override init() {
         super.init()
@@ -58,7 +59,7 @@ extension PlanetsListDataSource: UICollectionViewDataSource {
         case .results:
             let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: PlanetsCollectionViewCell.identifier, for: indexPath) as! PlanetsCollectionViewCell
             if let planet = planets(index: indexPath.row) {
-                cell.config(planet: planet, index: indexPath.row)
+                cell.config(planet: planet, index: indexPath.row , indexSelected: index )
             }
             return cell
         }
@@ -117,7 +118,7 @@ extension PlanetsListDataSource {
     internal func filterPlanets() {
         var solarSystemPlanets: [String] = []
         guard let solarSystem = self.solarSystem else { return }
-        for planet in solarSystem.bodies {
+        solarSystem.bodies.forEach { planet in
             if planet.isPlanet {
                 solarSystemPlanets.append(planet.englishName)
             }

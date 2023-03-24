@@ -14,8 +14,8 @@ class PlanetsCollectionViewCell: UICollectionViewCell, CodableViews {
     
     let width: CGFloat = 2
     let height: CGFloat = 2
-    let offset: CGFloat = 5
-    var planet: String = ""
+    let offset: CGFloat = 7
+
     
     lazy var dotViewRight: UIView = {
         let view = UIView()
@@ -54,9 +54,7 @@ class PlanetsCollectionViewCell: UICollectionViewCell, CodableViews {
 extension PlanetsCollectionViewCell {
     
     func setupHierachy() {
-        
         addSubviews(label, dotViewRight, dotViewLeft)
-        
     }
     
     func setupConstraints() {
@@ -85,10 +83,14 @@ extension PlanetsCollectionViewCell {
 
 extension PlanetsCollectionViewCell {
     
-    func config(planet name: String, index: Int) {
+    func config(planet name: String, index: Int, indexSelected: Int) {
         self.label.text = name
-        if index == 0 {
+        
+        if index == indexSelected {
             label.layer.opacity = 1
+        } else {
+            label.layer.opacity = 0.5
         }
     }
+
 }
