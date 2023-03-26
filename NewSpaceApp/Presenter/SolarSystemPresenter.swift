@@ -18,6 +18,7 @@ final class SolarSystemPresenter: PlanetsPresenterOutputProtocol {
     var repository: SolarSystemRepository
     var coordinator: PlanetInfoCoordinator
     weak var view: SolarSystemViewController?
+    var planet: Body?
     
     init(repository: SolarSystemRepository,
          coordinator: PlanetInfoCoordinator) {
@@ -50,8 +51,9 @@ final class SolarSystemPresenter: PlanetsPresenterOutputProtocol {
     
     private func fetchPlanetData(planet name: String) async {
         do {
-            let planets = try await repository.fetchPlanetData(planet: name)
-            if let moons = planets.moons {
+            let planet = try await repository.fetchPlanetData(planet: name)
+            self.planet = planet
+            if let moons = planet.moons {
                 await fetchMoonsData(moons: moons)
             }
         } catch {
@@ -62,18 +64,11 @@ final class SolarSystemPresenter: PlanetsPresenterOutputProtocol {
     private func fetchMoonsData(moons: [Moon]) async {
         moons.forEach { moon in
             Task {
-                let rel = moon.rel.components(separatedBy: "/")
-                if let name = rel.last {
-                    let moon = try await self.repository.fetchPlanetData(planet: name)
-                    print("------------> \(moon.englishName)")
-                }
+                let url = URL(string: moon.rel)
+                let moon = try await repository.fetchMoonsData(moon: url)
+                print(moon.englishName)
             }
         }
-    }
-    
-    internal func callPlanetViewController() {
-        let viewControllrer = coordinator.start()
-//        view?.pushViewController(viewControllrer, animated: true)
     }
     
 }

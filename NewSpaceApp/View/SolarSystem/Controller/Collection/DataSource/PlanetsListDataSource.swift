@@ -29,7 +29,6 @@ class PlanetsListDataSource: NSObject {
         return solarSystemPlanets.count
     }
     
-    
     internal func planets(index: Int) -> String? {
         switch state {
         case .loading:
@@ -69,7 +68,7 @@ extension PlanetsListDataSource: UICollectionViewDataSource {
 
 extension PlanetsListDataSource {
     
-    private func orderPlanetsInOrder(range: Int,planets: [String]) {
+    private func orderPlanetsInOrder(range: Int, planets: [String]) {
         var futurePlanetsHere: [String] = []
         for _ in 0...range {
             futurePlanetsHere.append("")

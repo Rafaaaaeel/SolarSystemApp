@@ -115,17 +115,15 @@ extension SolarSystemViewController: PlanetsListDelegate {
     
     func didScroll() {
         let index = getCurrentVisibleCellRow()
+        print(index)
         collection.source.index = index
     }
     
     func didSelectPlanet(at index: Int) {
         let selectedPlanet = collection.source.solarSystemPlanets[index]
-        print(selectedPlanet)
         solarSystemView.whichOneIsSelected = index
         presenter.fetchPlanet(planet: selectedPlanet)
         hapticFeedback.notificationOccurred(.success)
-        presenter.callPlanetViewController()
-//        self.pushViewController(PlanetViewController(), animated: true)
     }
 
 }

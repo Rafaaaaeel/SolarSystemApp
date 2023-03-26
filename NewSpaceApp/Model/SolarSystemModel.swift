@@ -19,7 +19,7 @@ struct Body: Codable{
     let name: String
     let englishName: String
     let isPlanet: Bool
-    let moons: [Moon]?
+    var moons: [Moon]?
     
 }
 

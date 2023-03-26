@@ -9,5 +9,5 @@ import Foundation
 
 
 protocol APIClienteProtocol{
-    func requestData<D: Decodable>(endpoint: String, params: [String: String]?) async throws -> D
+    func requestData<D: Decodable>(url: URL, params: [String: String]?) async throws -> D
 }
